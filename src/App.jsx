@@ -27,7 +27,7 @@ export default function App() {
   };
 
   return (
-    <div className="h-screen bg-[#050505] text-[#a0a0a0] font-light selection:bg-blue-500/30 overflow-hidden">
+    <div className="min-h-screen bg-[#050505] text-[#a0a0a0] font-light selection:bg-blue-500/30 overflow-x-hidden">
       {/* Cinematic Background */}
       <div className="fixed inset-0 z-0">
         <div className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] rounded-full bg-blue-900/10 blur-[150px] animate-pulse"></div>
@@ -40,7 +40,7 @@ export default function App() {
       </div>
 
       <div
-        className={`relative z-10 max-w-[1400px] mx-auto flex flex-col lg:flex-row h-screen transition-all duration-1000 ${loaded ? "opacity-100" : "opacity-0"}`}
+        className={`relative z-10 max-w-[1400px] mx-auto flex flex-col lg:flex-row min-h-screen transition-all duration-1000 ${loaded ? "opacity-100" : "opacity-0"}`}
       >
         {/* Left Sidebar - Fixed Info */}
         <aside className="w-full lg:w-[400px] lg:h-screen lg:sticky lg:top-0 p-6 lg:p-16 flex flex-col justify-between border-r border-white/5 bg-black/30 backdrop-blur-xl shadow-2xl">
@@ -111,7 +111,7 @@ export default function App() {
         </aside>
 
         {/* Right Content Area */}
-        <main className="flex-1 h-screen overflow-y-auto scroll-smooth p-6 lg:p-24">
+        <main className="flex-1 overflow-y-auto scroll-smooth p-6 lg:p-24">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeTab}
