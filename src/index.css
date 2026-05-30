@@ -2,6 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(59, 130, 246, 0.5) #050505;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: #050505;
+  color: white;
+}
+
+::selection {
+  background: rgba(59, 130, 246, 0.3);
+}
+
 ::-webkit-scrollbar {
   width: 6px;
 }

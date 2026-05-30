@@ -27,7 +27,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#050505] text-[#a0a0a0] font-light selection:bg-blue-500/30 overflow-x-hidden">
+    <div className="min-h-screen bg-dark text-[#a0a0a0] font-light selection:bg-blue-500/30 overflow-x-hidden">
       {/* Cinematic Background */}
       <div className="fixed inset-0 z-0">
         <div className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] rounded-full bg-blue-900/10 blur-[150px] animate-pulse"></div>
@@ -50,7 +50,7 @@ export default function App() {
               <div className="space-y-2">
                 <h1 className="text-4xl font-bold tracking-tight text-white leading-tight">
                   Rio Alghani <br />
-                  <span className="text-[#666]">Pratama</span>
+                  <span className="text-muted">Pratama</span>
                 </h1>
                 <TypeAnimation
                   sequence={[
@@ -152,7 +152,7 @@ export default function App() {
 function ProfilContent() {
   return (
     <div className="space-y-16">
-      <p className="max-w-2xl text-lg leading-relaxed text-[#888] font-light">
+      <p className="max-w-2xl text-lg leading-relaxed text-soft font-light">
         Dunia teknologi menjadi hal yang selalu menarik bagi saya sejak menempuh
         pendidikan di
         <a
@@ -168,7 +168,7 @@ function ProfilContent() {
         mengenal bagaimana teknologi dapat membantu menciptakan solusi yang
         bermanfaat dan mempermudah berbagai aktivitas.
       </p>
-      <p className="max-w-2xl text-lg leading-relaxed text-[#888] font-light">
+      <p className="max-w-2xl text-lg leading-relaxed text-soft font-light">
         Ketertarikan tersebut membawa saya untuk melanjutkan pendidikan di
         <a
           href="https://unikma.ac.id/"
@@ -340,7 +340,7 @@ function ProyekContent() {
                 Challenge
               </p>
 
-              <p className="text-[#888] leading-relaxed">{project.challenge}</p>
+              <p className="text-soft leading-relaxed">{project.challenge}</p>
             </div>
 
             {/* Impact */}
@@ -349,7 +349,7 @@ function ProyekContent() {
                 Impact
               </p>
 
-              <p className="text-[#888] leading-relaxed">{project.impact}</p>
+              <p className="text-soft leading-relaxed">{project.impact}</p>
             </div>
 
             {/* Tech Stack */}
@@ -485,7 +485,7 @@ function StatBox({ icon, title, desc }) {
         {icon}
       </div>
       <h4 className="text-white font-bold text-lg">{title}</h4>
-      <p className="text-sm text-[#666]">{desc}</p>
+      <p className="text-sm text-muted">{desc}</p>
     </div>
   );
 }
@@ -521,7 +521,7 @@ function EduItem({ school, degree, period, current }) {
           {period}
         </span>
         <h4 className="text-xl font-bold text-white">{school}</h4>
-        <p className="text-[#666] text-sm">{degree}</p>
+        <p className="text-muted text-sm">{degree}</p>
       </div>
     </div>
   );
