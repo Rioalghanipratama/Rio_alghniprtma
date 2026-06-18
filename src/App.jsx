@@ -250,7 +250,7 @@ function ProyekContent() {
         "Membangun sistem akademik yang terstruktur dan mudah digunakan untuk pengelolaan data mahasiswa.",
       impact:
         "Membantu proses pengelolaan data akademik menjadi lebih efisien dan terorganisir.",
-      link: "https://siakad-rio.rf.gd/login.html",
+      link: "http://siakad-rio.rf.gd/index.html",
       tech: ["PHP", "MySQL", "Bootstrap"],
       image: siakadImg,
       status: "Live",
