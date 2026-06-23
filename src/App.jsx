@@ -4,8 +4,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
 import { BsGithub } from "react-icons/bs";
 import andoliImg from "./assets/andoli.png";
-import apikperpusImg from "./assets/apikperpus.png";
+import sirukaImg from "./assets/siruka.png";
 import siakadImg from "./assets/siakad.png";
+import apikperpusImg from "./assets/apikperpus.png";
 import webkuImg from "./assets/webku.png";
 
 export default function App() {
@@ -54,11 +55,11 @@ export default function App() {
                 </h1>
                 <TypeAnimation
                   sequence={[
-                    "UI/UX Enthusiast",
+                    "Fullstack Web Developer",
                     2000,
-                    "Frontend Developer",
+                    "Information System Builder",
                     2000,
-                    "Backend Developer",
+                    "UI-Focused Developer",
                     2000,
                   ]}
                   wrapper="p"
@@ -165,8 +166,9 @@ function ProfilContent() {
           SMK Darussalam Karangpucung{" "}
         </a>
         dengan jurusan Teknik Komputer dan Jaringan (TKJ). Dari sana, saya mulai
-        mengenal bagaimana teknologi dapat membantu menciptakan solusi yang
-        bermanfaat dan mempermudah berbagai aktivitas.
+        mengenal bagaimana teknologi dapat digunakan untuk menciptakan solusi
+        yang bermanfaat, menyederhanakan proses kerja, dan membantu
+        menyelesaikan berbagai permasalahan secara lebih efektif.
       </p>
       <p className="max-w-2xl text-lg leading-relaxed text-soft font-light">
         Ketertarikan tersebut membawa saya untuk melanjutkan pendidikan di
@@ -179,23 +181,27 @@ function ProfilContent() {
           {" "}
           Universitas Komputama Majenang{" "}
         </a>
-        pada program studi Sistem Informasi (SI), sekaligus terus mengembangkan
+        pada program studi Sistem Informasi (SI), sekaligus memperdalam
         kemampuan dalam pengembangan web modern, desain antarmuka, dan
-        pengalaman pengguna. Saya menikmati proses membangun sebuah aplikasi
-        mulai dari ide, tampilan, hingga bagaimana aplikasi tersebut dapat
-        memberikan pengalaman yang nyaman, responsif, dan mudah digunakan.
+        pengalaman pengguna. Saat ini, saya berfokus pada pengembangan sistem
+        informasi berbasis web yang menggabungkan fungsionalitas, kemudahan
+        penggunaan, dan desain yang responsif. Saya menikmati setiap proses
+        pengembangan, mulai dari memahami kebutuhan pengguna, merancang solusi,
+        hingga mengimplementasikannya menjadi aplikasi yang mampu memberikan
+        manfaat nyata dan pengalaman yang baik bagi penggunanya.
       </p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <StatBox
           icon={<ShieldCheck className="text-blue-400" />}
-          title="Web Development"
-          desc="Membangun aplikasi web modern dengan fokus pada performa dan pengalaman pengguna."
+          title="Information System Builder"
+          desc="Mengembangkan sistem informasi berbasis web yang membantu menyelesaikan kebutuhan administrasi, akademik, dan operasional."
         />
+
         <StatBox
           icon={<Zap className="text-yellow-400" />}
-          title="UI & Experience"
-          desc="Menciptakan tampilan yang minimalis, responsif, dan nyaman digunakan."
+          title="UI-Focused Development"
+          desc="Menggabungkan fungsionalitas dan desain untuk menciptakan pengalaman pengguna yang modern, responsif, dan mudah digunakan."
         />
       </div>
     </div>
@@ -216,55 +222,70 @@ function ProyekContent() {
   const projects = [
     {
       title: "AnDoli POS V2",
-      category: "Modern Point of Sale",
-      role: "Frontend Developer",
+      category: "Retail Management System",
+      role: "Frontend Developer & UI Designer",
       challenge:
-        "Menciptakan pengalaman transaksi modern dengan antarmuka yang cepat, responsif, dan nyaman digunakan.",
+        "Merancang antarmuka Point of Sale yang mampu menampilkan data produk, proses transaksi, dan ringkasan penjualan secara cepat tanpa membingungkan pengguna.",
       impact:
-        "Membantu efisiensi transaksi retail dengan desain UI modern dan user friendly.",
+        "Menyediakan alur transaksi yang lebih efisien melalui dashboard interaktif, pencatatan penjualan, dan tampilan yang responsif di berbagai perangkat.",
       link: "https://andoli-v2.vercel.app/",
-      tech: ["React", "Tailwind", "Vercel"],
+      tech: ["React", "Tailwind CSS", "Framer Motion", "Vite", "Vercel"],
       image: andoliImg,
-      status: "Live",
+      status: "Production",
     },
 
     {
-      title: "ApikPerpus Web",
-      category: "Digital Library System",
-      role: "Frontend Developer",
+      title: "Sistem Informasi Peminjaman Ruangan Kampus (SIRUKA)",
+      category: "Campus Facility Management System",
+      role: "Frontend Developer & UI Designer",
       challenge:
-        "Membangun sistem perpustakaan digital dengan navigasi yang jelas dan pengalaman pengguna yang sederhana.",
+        "Mendigitalisasi proses peminjaman ruangan kampus yang sebelumnya dilakukan secara manual agar lebih terstruktur, transparan, dan mudah dipantau.",
       impact:
-        "Membantu pengelolaan data buku dan proses pencarian menjadi lebih praktis.",
-      link: "https://apikperpusweb-v2.vercel.app/",
-      tech: ["React", "Tailwind", "Firebase"],
-      image: apikperpusImg,
-      status: "Live",
+        "Membantu civitas akademika dalam mengajukan, memantau, dan mengelola peminjaman ruangan melalui platform berbasis web yang terpusat.",
+      link: "https://siruka.netlify.app/",
+      tech: ["React", "Tailwind CSS", "Vite", "Netlify"],
+      status: "Production",
+      image: sirukaImg,
     },
 
     {
-      title: "SIAKAD",
+      title: "Sistem Informasi Akademik (SIAKAD)",
       category: "Academic Information System",
       role: "Fullstack Developer",
       challenge:
-        "Membangun sistem akademik yang terstruktur dan mudah digunakan untuk pengelolaan data mahasiswa.",
+        "Mengintegrasikan data mahasiswa, dosen, mata kuliah, dan nilai ke dalam satu sistem akademik yang mudah dikelola dan diakses.",
       impact:
-        "Membantu proses pengelolaan data akademik menjadi lebih efisien dan terorganisir.",
-      link: "http://siakad-rio.rf.gd/index.html",
-      tech: ["PHP", "MySQL", "Bootstrap"],
+        "Menyederhanakan proses administrasi akademik melalui fitur autentikasi, pengelolaan data, dan dashboard berbasis web.",
+      link: "https://siakad-rio.rf.gd/index.html",
+      tech: ["PHP", "MySQL", "Bootstrap", "XAMPP"],
       image: siakadImg,
-      status: "Live",
+      status: "Production",
+    },
+
+    {
+      title: "ApikPerpus Web V2",
+      category: "Library Management System",
+      role: "Frontend Developer",
+      challenge:
+        "Mengorganisasi data buku, kategori, dan informasi perpustakaan ke dalam antarmuka yang mudah dipahami oleh pengguna maupun pengelola.",
+      impact:
+        "Mempermudah pencarian koleksi buku dan pengelolaan data perpustakaan melalui sistem berbasis web yang terstruktur.",
+      link: "https://apikperpusweb-v2.vercel.app/",
+      tech: ["React", "Tailwind CSS", "Firebase", "Vite", "Vercel"],
+      image: apikperpusImg,
+      status: "Production",
     },
 
     {
       title: "WebKu Cek",
-      category: "Campus Information Website",
+      category: "Campus Information Portal",
       role: "Frontend Developer",
       challenge:
-        "Menyusun informasi kampus agar lebih mudah diakses dengan tampilan yang sederhana dan responsif.",
-      impact: "Mempermudah penyampaian informasi akademik secara digital.",
+        "Menyajikan informasi kampus dalam satu platform yang mudah diakses dengan desain yang ringan dan responsif.",
+      impact:
+        "Meningkatkan aksesibilitas informasi akademik dan profil kampus bagi mahasiswa maupun calon mahasiswa.",
       link: "https://rioalghanipratama.github.io/WebKu-Cek/",
-      tech: ["HTML", "CSS", "JavaScript"],
+      tech: ["HTML", "CSS", "JavaScript", "GitHub Pages"],
       image: webkuImg,
       status: "Completed",
     },
@@ -395,35 +416,29 @@ function KeahlianContent() {
       <SectionHeader title="Keahlian Teknik" subtitle="02" />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-12">
         <SkillGroup
-          title="Frontend"
+          title="Web Development"
           skills={[
-            "HTML5",
-            "CSS3",
+            "React",
             "JavaScript",
-            "React JS",
             "Tailwind CSS",
-            "Responsive Design",
+            "Responsive Web Design",
+            "Modern UI Development",
           ]}
         />
         <SkillGroup
-          title="Backend & Database"
+          title="Information System Development"
           skills={[
             "PHP",
             "MySQL",
             "Database Design",
-            "REST API Basics",
             "Authentication System",
+            "CRUD Operations",
+            "System Analysis",
           ]}
         />
         <SkillGroup
-          title="Tools & Workflow"
-          skills={[
-            "Git & GitHub",
-            "Vercel",
-            "VS Code",
-            "UI/UX Fundamentals",
-            "Office",
-          ]}
+          title="Tools & Collaboration"
+          skills={["Git & GitHub", "Vercel", "Netlify", "VS Code", "Figma"]}
         />
       </div>
     </div>
