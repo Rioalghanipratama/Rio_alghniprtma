@@ -231,21 +231,21 @@ function ProyekContent() {
       link: "https://andoli-v2.vercel.app/",
       tech: ["React", "Tailwind CSS", "Framer Motion", "Vite", "Vercel"],
       image: andoliImg,
-      status: "Production",
+      status: "Live",
     },
 
     {
       title: "Sistem Informasi Peminjaman Ruangan Kampus (SIRUKA)",
-      category: "Campus Facility Management System",
-      role: "Frontend Developer & UI Designer",
+      category: "Campus Room Reservation System",
+      role: "Fullstack Web Developer",
       challenge:
-        "Mendigitalisasi proses peminjaman ruangan kampus yang sebelumnya dilakukan secara manual agar lebih terstruktur, transparan, dan mudah dipantau.",
+        "Merancang dan mengembangkan platform peminjaman ruangan kampus untuk mengatasi proses reservasi manual yang kurang efisien serta meningkatkan transparansi pengelolaan fasilitas kampus.",
       impact:
-        "Membantu civitas akademika dalam mengajukan, memantau, dan mengelola peminjaman ruangan melalui platform berbasis web yang terpusat.",
+        "Menyederhanakan proses peminjaman ruangan melalui sistem terpusat yang mendukung pengajuan, persetujuan, dan pemantauan status peminjaman secara real-time.",
       link: "https://siruka.netlify.app/",
-      tech: ["React", "Tailwind CSS", "Vite", "Netlify"],
-      status: "Production",
+      tech: ["React", "Tailwind CSS", "Firebase", "Vite", "Netlify"],
       image: sirukaImg,
+      status: "Live",
     },
 
     {
@@ -259,7 +259,7 @@ function ProyekContent() {
       link: "https://siakad-rio.rf.gd/index.html",
       tech: ["PHP", "MySQL", "Bootstrap", "XAMPP"],
       image: siakadImg,
-      status: "Production",
+      status: "Live",
     },
 
     {
@@ -273,7 +273,7 @@ function ProyekContent() {
       link: "https://apikperpusweb-v2.vercel.app/",
       tech: ["React", "Tailwind CSS", "Firebase", "Vite", "Vercel"],
       image: apikperpusImg,
-      status: "Production",
+      status: "Live",
     },
 
     {
@@ -287,7 +287,7 @@ function ProyekContent() {
       link: "https://rioalghanipratama.github.io/WebKu-Cek/",
       tech: ["HTML", "CSS", "JavaScript", "GitHub Pages"],
       image: webkuImg,
-      status: "Completed",
+      status: "In Development",
     },
   ];
 
