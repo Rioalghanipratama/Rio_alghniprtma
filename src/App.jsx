@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { CheckCircle2 } from "lucide-react";
 import { Mail, Phone, ArrowUpRight, ShieldCheck, Zap } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
@@ -228,8 +229,14 @@ function ProyekContent() {
         "Merancang antarmuka Point of Sale yang mampu menampilkan data produk, proses transaksi, dan ringkasan penjualan secara cepat tanpa membingungkan pengguna.",
       impact:
         "Menyediakan alur transaksi yang lebih efisien melalui dashboard interaktif, pencatatan penjualan, dan tampilan yang responsif di berbagai perangkat.",
+      features: [
+        "Product Management",
+        "Transaction Flow",
+        "Sales Dashboard",
+        "Responsive UI",
+      ],
       link: "https://andoli-v2.vercel.app/",
-      tech: ["React", "Tailwind CSS", "Framer Motion", "Vite", "Vercel"],
+      tech: ["React", "Tailwind CSS", "Vercel"],
       image: andoliImg,
       status: "Live",
     },
@@ -239,11 +246,18 @@ function ProyekContent() {
       category: "Campus Room Reservation System",
       role: "Fullstack Web Developer",
       challenge:
-        "Merancang dan mengembangkan platform peminjaman ruangan kampus untuk mengatasi proses reservasi manual yang kurang efisien serta meningkatkan transparansi pengelolaan fasilitas kampus.",
+        "Mengembangkan sistem peminjaman ruangan kampus yang mampu mengelola data ruangan, proses pengajuan, persetujuan, dan pemantauan peminjaman secara digital.",
       impact:
-        "Menyederhanakan proses peminjaman ruangan melalui sistem terpusat yang mendukung pengajuan, persetujuan, dan pemantauan status peminjaman secara real-time.",
+        "Membantu digitalisasi administrasi peminjaman ruangan kampus sehingga proses reservasi menjadi lebih terstruktur, efisien, dan mudah dipantau.",
+      features: [
+        "Room Reservation",
+        "Booking Management",
+        "Status Tracking",
+        "Admin Dashboard",
+        "Responsive Interface",
+      ],
       link: "https://siruka.netlify.app/",
-      tech: ["React", "Tailwind CSS", "Firebase", "Vite", "Netlify"],
+      tech: ["React", "Tailwind CSS", "Firebase"],
       image: sirukaImg,
       status: "Live",
     },
@@ -251,13 +265,20 @@ function ProyekContent() {
     {
       title: "Sistem Informasi Akademik (SIAKAD)",
       category: "Academic Information System",
-      role: "Fullstack Developer",
+      role: "Fullstack Web Developer",
       challenge:
-        "Mengintegrasikan data mahasiswa, dosen, mata kuliah, dan nilai ke dalam satu sistem akademik yang mudah dikelola dan diakses.",
+        "Mengintegrasikan data akademik seperti mahasiswa, dosen, mata kuliah, dan nilai ke dalam satu sistem yang terstruktur dan mudah dikelola.",
       impact:
-        "Menyederhanakan proses administrasi akademik melalui fitur autentikasi, pengelolaan data, dan dashboard berbasis web.",
+        "Menyederhanakan proses administrasi akademik melalui pengelolaan data terpusat dan fitur autentikasi pengguna.",
+      features: [
+        "Authentication",
+        "Student Management",
+        "Lecturer Management",
+        "Course Management",
+        "Grade Processing",
+      ],
       link: "https://siakad-rio.rf.gd/index.html",
-      tech: ["PHP", "MySQL", "Bootstrap", "XAMPP"],
+      tech: ["PHP", "MySQL", "Bootstrap"],
       image: siakadImg,
       status: "Live",
     },
@@ -267,11 +288,17 @@ function ProyekContent() {
       category: "Library Management System",
       role: "Frontend Developer",
       challenge:
-        "Mengorganisasi data buku, kategori, dan informasi perpustakaan ke dalam antarmuka yang mudah dipahami oleh pengguna maupun pengelola.",
+        "Menyederhanakan pengelolaan dan pencarian koleksi buku melalui antarmuka digital yang mudah dipahami oleh pengguna.",
       impact:
-        "Mempermudah pencarian koleksi buku dan pengelolaan data perpustakaan melalui sistem berbasis web yang terstruktur.",
+        "Meningkatkan aksesibilitas informasi perpustakaan dan mempermudah proses pencarian koleksi secara online.",
+      features: [
+        "Book Catalog",
+        "Book Search",
+        "Category Filtering",
+        "Responsive Design",
+      ],
       link: "https://apikperpusweb-v2.vercel.app/",
-      tech: ["React", "Tailwind CSS", "Firebase", "Vite", "Vercel"],
+      tech: ["React", "Tailwind CSS", "Firebase"],
       image: apikperpusImg,
       status: "Live",
     },
@@ -281,11 +308,17 @@ function ProyekContent() {
       category: "Campus Information Portal",
       role: "Frontend Developer",
       challenge:
-        "Menyajikan informasi kampus dalam satu platform yang mudah diakses dengan desain yang ringan dan responsif.",
+        "Menyajikan informasi kampus dalam satu portal yang ringan, responsif, dan mudah diakses oleh mahasiswa maupun calon mahasiswa.",
       impact:
-        "Meningkatkan aksesibilitas informasi akademik dan profil kampus bagi mahasiswa maupun calon mahasiswa.",
+        "Mempermudah akses terhadap informasi akademik dan profil kampus melalui media digital.",
+      features: [
+        "Campus Profile",
+        "Academic Information",
+        "Simple Navigation",
+        "Responsive Layout",
+      ],
       link: "https://rioalghanipratama.github.io/WebKu-Cek/",
-      tech: ["HTML", "CSS", "JavaScript", "GitHub Pages"],
+      tech: ["HTML", "CSS", "JavaScript"],
       image: webkuImg,
       status: "In Development",
     },
@@ -371,6 +404,18 @@ function ProyekContent() {
               </p>
 
               <p className="text-soft leading-relaxed">{project.impact}</p>
+            </div>
+
+            <div className="flex flex-wrap gap-2">
+              {project.features.map((feature, index) => (
+                <div
+                  key={index}
+                  className="flex items-center gap-1 px-3 py-1 rounded-full bg-white/5 border border-white/10"
+                >
+                  <CheckCircle2 size={12} />
+                  <span className="text-xs">{feature}</span>
+                </div>
+              ))}
             </div>
 
             {/* Tech Stack */}
