@@ -418,27 +418,34 @@ function KeahlianContent() {
         <SkillGroup
           title="Web Development"
           skills={[
-            "React",
+            "HTML5",
+            "CSS3",
             "JavaScript",
+            "React",
             "Tailwind CSS",
             "Responsive Web Design",
-            "Modern UI Development",
           ]}
         />
         <SkillGroup
           title="Information System Development"
           skills={[
+            "System Analysis",
+            "Database Design",
             "PHP",
             "MySQL",
-            "Database Design",
-            "Authentication System",
-            "CRUD Operations",
-            "System Analysis",
+            "Authentication & Authorization",
           ]}
         />
         <SkillGroup
           title="Tools & Collaboration"
-          skills={["Git & GitHub", "Vercel", "Netlify", "VS Code", "Figma"]}
+          skills={[
+            "Git & GitHub",
+            "Vercel",
+            "Netlify",
+            "VS Code",
+            "Figma",
+            "UI/UX Fundamentals",
+          ]}
         />
       </div>
     </div>
