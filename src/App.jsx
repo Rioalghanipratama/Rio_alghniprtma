@@ -66,7 +66,7 @@ export default function App() {
                   wrapper="p"
                   speed={50}
                   repeat={Infinity}
-                  className="text-sm tracking-[0.15em] text-blue-400 font-bold drop-shadow-[0_0_8px_rgba(59,130,246,0.8)]"
+                  className="text-sm tracking-[0.15em] text-blue-400 font-bold drop-shadow-[0_0_8px_rgba(59,130,246,0.5)]"
                 />
               </div>
             </div>
