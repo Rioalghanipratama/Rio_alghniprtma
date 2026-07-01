@@ -9,6 +9,7 @@ import PendidikanContent from "./components/sections/PendidikanContent";
 export default function App() {
   const [activeTab, setActiveTab] = useState("profil");
   const [loaded, setLoaded] = useState(false);
+  const [lang, setLang] = useState("id");
 
   useEffect(() => {
     const id = requestAnimationFrame(() => setLoaded(true));
@@ -16,10 +17,10 @@ export default function App() {
   }, []);
 
   const sections = {
-    profil: <ProfilContent />,
-    proyek: <ProyekContent />,
-    keahlian: <KeahlianContent />,
-    pendidikan: <PendidikanContent />,
+    profil: <ProfilContent lang={lang} />,
+    proyek: <ProyekContent lang={lang} />,
+    keahlian: <KeahlianContent lang={lang} />,
+    pendidikan: <PendidikanContent lang={lang} />,
   };
 
   return (
@@ -34,6 +35,16 @@ export default function App() {
         <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"></div>
       </div>
 
+      {/* Tombol Switcher Bahasa */}
+      <div className="fixed top-6 right-6 z-50">
+        <button
+          onClick={() => setLang((prev) => (prev === "id" ? "en" : "id"))}
+          className="px-4 py-2 bg-white/5 border border-white/10 rounded-full text-xs font-bold text-white hover:bg-blue-500/20 hover:border-blue-500/50 backdrop-blur-md transition-all duration-300 uppercase tracking-widest shadow-lg"
+        >
+          🌐 {lang === "id" ? "EN" : "ID"}
+        </button>
+      </div>
+
       <div
         className={`relative z-10 max-w-[1400px] mx-auto flex flex-col lg:flex-row min-h-screen transition-all duration-1000 ${loaded ? "opacity-100" : "opacity-0"}`}
       >
@@ -42,6 +53,7 @@ export default function App() {
           activeTab={activeTab}
           setActiveTab={setActiveTab}
           sections={sections}
+          lang={lang}
         />
 
         {/* Area Konten Utama */}

@@ -1,4 +1,5 @@
 import React from "react";
+import { translations } from "../../data/translations";
 
 // Komponen kecil khusus untuk Pendidikan
 function SectionHeader({ title, subtitle }) {
@@ -29,20 +30,28 @@ function EduItem({ school, degree, period, current }) {
   );
 }
 
-export default function PendidikanContent() {
+export default function PendidikanContent({ lang }) {
   return (
     <div className="space-y-16">
-      <SectionHeader title="Riwayat Akademis" subtitle="03" />
+      <SectionHeader title={translations[lang].riwayatAkademis} subtitle="03" />
       <div className="space-y-16">
         <EduItem
           school="Universitas Komputama Majenang"
-          degree="S1 Sistem Informasi"
-          period="2024 — Sekarang"
+          degree={
+            lang === "id"
+              ? "S1 Sistem Informasi"
+              : "Bachelor of Information Systems"
+          }
+          period={lang === "id" ? "2024 — Sekarang" : "2024 — Present"}
           current={true}
         />
         <EduItem
           school="SMK Darussalam Karangpucung"
-          degree="Teknik Komputer dan Jaringan"
+          degree={
+            lang === "id"
+              ? "Teknik Komputer dan Jaringan"
+              : "Computer and Network Engineering"
+          }
           period="2020 — 2023"
           current={false}
         />

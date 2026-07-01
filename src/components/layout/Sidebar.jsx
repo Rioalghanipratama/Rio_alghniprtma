@@ -4,7 +4,16 @@ import { BsGithub } from "react-icons/bs";
 import { Mail, Phone } from "lucide-react";
 import SidebarContact from "../atoms/SidebarContact";
 
-export default function Sidebar({ activeTab, setActiveTab, sections }) {
+// Menerima props 'lang' dari App.jsx
+export default function Sidebar({ activeTab, setActiveTab, sections, lang }) {
+  // Kamus kecil lokal khusus untuk label menu navigasi
+  const menuLabels = {
+    profil: lang === "id" ? "Profil" : "Profile",
+    proyek: lang === "id" ? "Proyek" : "Projects",
+    keahlian: lang === "id" ? "Keahlian" : "Skills",
+    pendidikan: lang === "id" ? "Pendidikan" : "Education",
+  };
+
   return (
     <aside className="w-full lg:w-[400px] lg:h-screen lg:sticky lg:top-0 p-6 lg:p-16 flex flex-col justify-between border-r border-white/5 bg-black/30 backdrop-blur-xl shadow-2xl">
       <div className="space-y-16">
@@ -15,20 +24,41 @@ export default function Sidebar({ activeTab, setActiveTab, sections }) {
               Rio Alghani <br />
               <span className="text-muted">Pratama</span>
             </h1>
-            <TypeAnimation
-              sequence={[
-                "Fullstack Web Developer",
-                2000,
-                "Information System Builder",
-                2000,
-                "UI-Focused Developer",
-                2000,
-              ]}
-              wrapper="p"
-              speed={50}
-              repeat={Infinity}
-              className="text-sm tracking-[0.15em] text-blue-400 font-bold drop-shadow-[0_0_8px_rgba(59,130,246,0.5)]"
-            />
+
+            {/* Animasi teks yang otomatis berganti bahasa sesuai state lang */}
+            {lang === "id" ? (
+              <TypeAnimation
+                key="id-anim"
+                sequence={[
+                  "Pengembang Web Full-stack",
+                  2000,
+                  "Pembuat Sistem Informasi",
+                  2000,
+                  "Pengembang yang Berfokus pada UI",
+                  2000,
+                ]}
+                wrapper="p"
+                speed={50}
+                repeat={Infinity}
+                className="text-sm tracking-[0.15em] text-blue-400 font-bold drop-shadow-[0_0_8px_rgba(59,130,246,0.5)]"
+              />
+            ) : (
+              <TypeAnimation
+                key="en-anim"
+                sequence={[
+                  "Full-stack Web Developer",
+                  2000,
+                  "Information System Builder",
+                  2000,
+                  "UI-Focused Developer",
+                  2000,
+                ]}
+                wrapper="p"
+                speed={50}
+                repeat={Infinity}
+                className="text-sm tracking-[0.15em] text-blue-400 font-bold drop-shadow-[0_0_8px_rgba(59,130,246,0.5)]"
+              />
+            )}
           </div>
         </div>
 
@@ -50,7 +80,7 @@ export default function Sidebar({ activeTab, setActiveTab, sections }) {
                 }`}
               ></span>
               <span className="text-xs uppercase tracking-[0.4em] font-black">
-                {key}
+                {menuLabels[key]}
               </span>
             </button>
           ))}

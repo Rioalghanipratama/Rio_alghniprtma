@@ -1,6 +1,6 @@
 import React from "react";
+import { translations } from "../../data/translations";
 
-// Komponen kecil khusus untuk Keahlian
 function SectionHeader({ title, subtitle }) {
   return (
     <div className="flex items-baseline gap-4 mb-12">
@@ -32,13 +32,14 @@ function SkillGroup({ title, skills }) {
   );
 }
 
-export default function KeahlianContent() {
+export default function KeahlianContent({ lang }) {
   return (
     <div className="space-y-16">
-      <SectionHeader title="Keahlian Teknik" subtitle="02" />
+      <SectionHeader title={translations[lang].keahlianTeknik} subtitle="02" />
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-12">
         <SkillGroup
-          title="Web Development"
+          title={lang === "id" ? "Pengembangan Web" : "Web Development"}
           skills={[
             "HTML5",
             "CSS3",
@@ -49,7 +50,11 @@ export default function KeahlianContent() {
           ]}
         />
         <SkillGroup
-          title="Information System Development"
+          title={
+            lang === "id"
+              ? "Pengembangan Sistem Informasi"
+              : "Information System Development"
+          }
           skills={[
             "System Analysis",
             "Database Design",
@@ -59,7 +64,7 @@ export default function KeahlianContent() {
           ]}
         />
         <SkillGroup
-          title="Tools & Collaboration"
+          title={lang === "id" ? "Alat & Kolaborasi" : "Tools & Collaboration"}
           skills={[
             "Git & GitHub",
             "Vercel",

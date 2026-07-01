@@ -1,0 +1,28 @@
+export const translations = {
+  id: {
+    profil: "Profil",
+    proyek: "Proyek",
+    keahlian: "Keahlian",
+    pendidikan: "Pendidikan",
+    role: "Peran",
+    challenge: "Tantangan",
+    impact: "Dampak",
+    viewProject: "Lihat Proyek",
+    arsipProyek: "Arsip Proyek.",
+    keahlianTeknik: "Keahlian Teknik",
+    riwayatAkademis: "Riwayat Akademis",
+  },
+  en: {
+    profil: "Profile",
+    proyek: "Projects",
+    keahlian: "Skills",
+    pendidikan: "Education",
+    role: "Role",
+    challenge: "Challenge",
+    impact: "Impact",
+    viewProject: "View Project",
+    arsipProyek: "Project Archive.",
+    keahlianTeknik: "Technical Skills",
+    riwayatAkademis: "Academic History",
+  },
+};

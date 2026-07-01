@@ -18,8 +18,8 @@ function SectionHeader({ title, subtitle }) {
   );
 }
 
-// 2. Komponen Kartu Proyek (Dioptimalkan agar efek hover tidak lag)
-function ProjectCard({ project, index }) {
+// 2. Komponen Kartu Proyek (Menerima props 'lang')
+function ProjectCard({ project, index, lang }) {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   const handleMouseMove = (e) => {
@@ -58,7 +58,7 @@ function ProjectCard({ project, index }) {
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/10 to-transparent"></div>
         <div className="absolute top-6 left-6">
           <span className="px-4 py-2 rounded-full bg-blue-500/20 backdrop-blur-md border border-blue-400/20 text-xs tracking-widest uppercase text-blue-300 font-bold">
-            {project.status}
+            {lang === "id" ? project.status.id : project.status.en}
           </span>
         </div>
       </a>
@@ -67,42 +67,50 @@ function ProjectCard({ project, index }) {
       <div className="space-y-6">
         <div className="space-y-2">
           <p className="text-sm uppercase tracking-[0.3em] text-blue-400">
-            {project.category}
+            {lang === "id" ? project.Kategori.id : project.Kategori.en}
           </p>
           <h3 className="text-4xl font-bold text-white">{project.title}</h3>
         </div>
 
         <div>
           <p className="text-xs uppercase tracking-[0.3em] text-white/30 mb-2">
-            Role
+            {lang === "id" ? "Peran" : "Role"}
           </p>
-          <p className="text-white font-medium">{project.role}</p>
+          <p className="text-white font-medium">
+            {lang === "id" ? project.Peran.id : project.Peran.en}
+          </p>
         </div>
 
         <div>
           <p className="text-xs uppercase tracking-[0.3em] text-white/30 mb-2">
-            Challenge
+            {lang === "id" ? "Tantangan" : "Challenge"}
           </p>
-          <p className="text-soft leading-relaxed">{project.challenge}</p>
+          <p className="text-soft leading-relaxed">
+            {lang === "id" ? project.Tantangan.id : project.Tantangan.en}
+          </p>
         </div>
 
         <div>
           <p className="text-xs uppercase tracking-[0.3em] text-white/30 mb-2">
-            Impact
+            {lang === "id" ? "Dampak" : "Impact"}
           </p>
-          <p className="text-soft leading-relaxed">{project.impact}</p>
+          <p className="text-soft leading-relaxed">
+            {lang === "id" ? project.Dampak.id : project.Dampak.en}
+          </p>
         </div>
 
         <div className="flex flex-wrap gap-2">
-          {project.features.map((feature, idx) => (
-            <div
-              key={idx}
-              className="flex items-center gap-1 px-3 py-1 rounded-full bg-white/5 border border-white/10"
-            >
-              <CheckCircle2 size={12} />
-              <span className="text-xs">{feature}</span>
-            </div>
-          ))}
+          {(lang === "id" ? project.Fitur.id : project.Fitur.en).map(
+            (feature, idx) => (
+              <div
+                key={idx}
+                className="flex items-center gap-1 px-3 py-1 rounded-full bg-white/5 border border-white/10"
+              >
+                <CheckCircle2 size={12} />
+                <span className="text-xs">{feature}</span>
+              </div>
+            ),
+          )}
         </div>
 
         <div className="flex flex-wrap gap-3 pt-2">
@@ -124,7 +132,7 @@ function ProjectCard({ project, index }) {
             className="inline-flex items-center gap-3 text-white hover:text-blue-400 transition-all duration-300 group"
           >
             <span className="text-sm uppercase tracking-[0.25em] font-bold">
-              View Project
+              {lang === "id" ? "Lihat Proyek" : "View Project"}
             </span>
             <ArrowUpRight
               size={18}
@@ -137,113 +145,198 @@ function ProjectCard({ project, index }) {
   );
 }
 
-// 3. Komponen Utama Halaman Proyek
-export default function ProyekContent() {
+// 3. Komponen Utama Halaman Proyek (Menangkap props 'lang')
+export default function ProyekContent({ lang }) {
   const projectsData = [
     {
       title: "AnDoli POS V2",
-      category: "Retail Management System",
-      role: "Frontend Developer & UI Designer",
-      challenge:
-        "Merancang antarmuka Point of Sale yang mampu menampilkan data produk, proses transaksi, dan ringkasan penjualan secara cepat tanpa membingungkan pengguna.",
-      impact:
-        "Menyediakan alur transaksi yang lebih efisien melalui dashboard interaktif, pencatatan penjualan, dan tampilan yang responsif di berbagai perangkat.",
-      features: [
-        "Product Management",
-        "Transaction Flow",
-        "Sales Dashboard",
-        "Responsive UI",
-      ],
+      Kategori: {
+        id: "Sistem Manajemen Ritel",
+        en: "Retail Management System",
+      },
+      Peran: {
+        id: "Frontend Developer & UI Designer",
+        en: "Frontend Developer & UI Designer",
+      },
+      Tantangan: {
+        id: "Merancang antarmuka Point of Sale yang mampu menampilkan data produk, proses transaksi, dan ringkasan penjualan secara cepat tanpa membingungkan pengguna.",
+        en: "Designing a high-performance Point of Sale (POS) interface capable of executing real-time transactions and dynamic sales summary without adding UI friction.",
+      },
+      Dampak: {
+        id: "Menyediakan alur transaksi yang lebih efisien melalui dashboard interaktif, pencatatan penjualan, dan tampilan yang responsif di berbagai perangkat.",
+        en: "Optimized operational speed by engineering responsive web cashiers, minimizing checkout delay, and presenting real-time financial tracking charts.",
+      },
+      Fitur: {
+        id: [
+          "Manajemen Produk",
+          "Alur Transaksi",
+          "Dasbor Penjualan",
+          "UI Responsif",
+        ],
+        en: [
+          "Product Inventory",
+          "Transaction Engine",
+          "Sales Analytics",
+          "Responsive Layout",
+        ],
+      },
       link: "https://andoli-v2.vercel.app/",
       tech: ["React", "Tailwind CSS", "Vercel"],
       image: andoliImg,
-      status: "Live",
+      status: { id: "Hidup", en: "Live" },
     },
     {
       title: "Sistem Informasi Peminjaman Ruangan Kampus (SIRUKA)",
-      category: "Campus Room Reservation System",
-      role: "Fullstack Web Developer",
-      challenge:
-        "Mengembangkan sistem peminjaman ruangan kampus yang mampu mengelola data ruangan, proses pengajuan, persetujuan, dan pemantauan peminjaman secara digital.",
-      impact:
-        "Membantu digitalisasi administrasi peminjaman ruangan kampus sehingga proses reservasi menjadi lebih terstruktur, efisien, dan mudah dipantau.",
-      features: [
-        "Room Reservation",
-        "Booking Management",
-        "Status Tracking",
-        "Admin Dashboard",
-        "Responsive Interface",
-      ],
+      Kategori: {
+        id: "Sistem Reservasi Ruangan Kampus",
+        en: "Campus Room Reservation System",
+      },
+      Peran: { id: "Fullstack Web Developer", en: "Fullstack Web Developer" },
+      Tantangan: {
+        id: "Mengembangkan sistem peminjaman ruangan kampus yang mampu mengelola data ruangan, proses pengajuan, persetujuan, dan pemantauan peminjaman secara digital.",
+        en: "Developing a robust digitized booking system to handle concurrent room reservation requests, approval flows, and real-time availability states.",
+      },
+      Dampak: {
+        id: "Membantu digitalisasi administrasi peminjaman ruangan kampus sehingga proses reservasi menjadi lebih terstruktur, efisien, dan mudah dipantau.",
+        en: "Replaced slow manual paper bureaucracy into a fast web ecosystem—enabling instant status updates and reducing booking friction for campus members.",
+      },
+      Fitur: {
+        id: [
+          "Reservasi Kamar",
+          "Manajemen Pemesanan",
+          "Pelacakan Status",
+          "Dasbor Admin",
+          "Antarmuka Responsif",
+        ],
+        en: [
+          "Room Reservation",
+          "Booking Engines",
+          "Real-time Tracking",
+          "Admin Control Deck",
+          "Responsive UI",
+        ],
+      },
       link: "https://siruka.netlify.app/",
       tech: ["React", "Tailwind CSS", "Firebase"],
       image: sirukaImg,
-      status: "Live",
+      status: { id: "Hidup", en: "Live" },
     },
     {
       title: "Sistem Informasi Akademik (SIAKAD)",
-      category: "Academic Information System",
-      role: "Fullstack Web Developer",
-      challenge:
-        "Mengintegrasikan data akademik seperti mahasiswa, dosen, mata kuliah, dan nilai ke dalam satu sistem yang terstruktur dan mudah dikelola.",
-      impact:
-        "Menyederhanakan proses administrasi akademik melalui pengelolaan data terpusat dan fitur autentikasi pengguna.",
-      features: [
-        "Authentication",
-        "Student Management",
-        "Lecturer Management",
-        "Course Management",
-        "Grade Processing",
-      ],
+      Kategori: {
+        id: "Sistem Informasi Akademik",
+        en: "Academic Information System",
+      },
+      Peran: { id: "Fullstack Web Developer", en: "Fullstack Web Developer" },
+      Tantangan: {
+        id: "Mengintegrasikan data akademik seperti mahasiswa, dosen, mata kuliah, dan nilai ke dalam satu sistem yang terstruktur dan mudah dikelola.",
+        en: "Architecting a unified, secure database to interconnect academic assets—such as students, lecturers, classes, and grade reports into a logical relational workflow.",
+      },
+      Dampak: {
+        id: "Menyederhanakan proses administrasi akademik melalui pengelolaan data terpusat dan fitur autentikasi pengguna.",
+        en: "Centralized administrative data management and deployed user access control systems to accelerate processing academic rosters and grades.",
+      },
+      Fitur: {
+        id: [
+          "Autentikasi",
+          "Manajemen Mahasiswa",
+          "Manajemen Dosen",
+          "Manajemen Mata Kuliah",
+          "Manajemen Jadwal Perkuliahan",
+          "Pemrosesan Nilai",
+        ],
+        en: [
+          "Secure Auth",
+          "Student Ledger",
+          "Faculty Controls",
+          "Curriculum Management",
+          "Class Scheduler",
+          "Grade Processing Engine",
+        ],
+      },
       link: "https://siakad-rio.rf.gd/index.html",
       tech: ["PHP", "MySQL", "Bootstrap"],
       image: siakadImg,
-      status: "Live",
+      status: { id: "Hidup", en: "Live" },
     },
     {
       title: "ApikPerpus Web V2",
-      category: "Library Management System",
-      role: "Frontend Developer",
-      challenge:
-        "Menyederhanakan pengelolaan dan pencarian koleksi buku melalui antarmuka digital yang mudah dipahami oleh pengguna.",
-      impact:
-        "Meningkatkan aksesibilitas informasi perpustakaan dan mempermudah proses pencarian koleksi secara online.",
-      features: [
-        "Book Catalog",
-        "Book Search",
-        "Category Filtering",
-        "Responsive Design",
-      ],
+      Kategori: {
+        id: "Sistem Manajemen Perpustakaan",
+        en: "Library Management System",
+      },
+      Peran: { id: "Frontend Developer", en: "Frontend Developer" },
+      Tantangan: {
+        id: "Menyederhanakan pengelolaan dan pencarian koleksi buku melalui antarmuka digital yang mudah dipahami oleh pengguna.",
+        en: "Simplifying catalog management and book index search journeys by reducing interactive layers on user interfaces.",
+      },
+      Dampak: {
+        id: "Meningkatkan aksesibilitas informasi perpustakaan dan mempermudah proses pencarian koleksi secara online.",
+        en: "Boosted digital book exploration rates and created clean, user-friendly digital library access paths for students.",
+      },
+      Fitur: {
+        id: [
+          "Book Catalog",
+          "Book Search",
+          "Kategori Filtering",
+          "Responsive Design",
+        ],
+        en: [
+          "Book Catalog",
+          "Book Search",
+          "Category Filtering",
+          "Responsive Design",
+        ],
+      },
       link: "https://apikperpusweb-v2.vercel.app/",
       tech: ["React", "Tailwind CSS", "Firebase"],
       image: apikperpusImg,
-      status: "Live",
+      status: { id: "Hidup", en: "Live" },
     },
     {
       title: "WebKu Cek",
-      category: "Campus Information Portal",
-      role: "Frontend Developer",
-      challenge:
-        "Menyajikan informasi kampus dalam satu portal yang ringan, responsif, dan mudah diakses oleh mahasiswa maupun calon mahasiswa.",
-      impact:
-        "Mempermudah akses terhadap informasi akademik dan profil kampus melalui media digital.",
-      features: [
-        "Campus Profile",
-        "Academic Information",
-        "Simple Navigation",
-        "Responsive Layout",
-      ],
+      Kategori: {
+        id: "Portal Informasi Kampus",
+        en: "Campus Information Portal",
+      },
+      Peran: { id: "Frontend Developer", en: "Frontend Developer" },
+      Tantangan: {
+        id: "Menyajikan informasi kampus dalam satu portal yang ringan, responsif, dan mudah diakses oleh mahasiswa maupun calon mahasiswa.",
+        en: "Compressing asset sizes to present comprehensive educational profiles into a highly responsive and lightweight gateway hub.",
+      },
+      Dampak: {
+        id: "Mempermudah akses terhadap informasi akademik dan profil kampus melalui media digital.",
+        en: "Improved public engagement metrics and lowered initial loading speeds for students finding official campus news.",
+      },
+      Fitur: {
+        id: [
+          "Profil Kampus",
+          "Informasi Akademik",
+          "Navigasi Sederhana",
+          "Tata Letak Responsif",
+        ],
+        en: [
+          "Campus Profiles",
+          "Academic Feeds",
+          "Streamlined Navigation",
+          "Responsive Web Layout",
+        ],
+      },
       link: "https://rioalghanipratama.github.io/WebKu-Cek/",
       tech: ["HTML", "CSS", "JavaScript"],
       image: webkuImg,
-      status: "In Development",
+      status: { id: "Sedang Dikembangkan", en: "In Development" },
     },
   ];
 
   return (
     <div className="space-y-16">
-      <SectionHeader title="Arsip Proyek." subtitle="01" />
+      <SectionHeader
+        title={lang === "id" ? "Arsip Proyek" : "Project Archive"}
+        subtitle="01"
+      />
       {projectsData.map((project, index) => (
-        <ProjectCard key={index} project={project} index={index} />
+        <ProjectCard key={index} project={project} index={index} lang={lang} />
       ))}
     </div>
   );

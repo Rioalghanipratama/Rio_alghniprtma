@@ -60,7 +60,7 @@ export default function ProjectCard({ project, index }) {
             className="inline-flex items-center gap-3 text-white hover:text-blue-400 transition-all duration-300 group"
           >
             <span className="text-sm uppercase tracking-[0.25em] font-bold">
-              View Project
+              Lihat Proyek
             </span>
             <ArrowUpRight
               size={18}
