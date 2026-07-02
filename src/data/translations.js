@@ -8,9 +8,9 @@ export const translations = {
     challenge: "Tantangan",
     impact: "Dampak",
     viewProject: "Lihat Proyek",
-    arsipProyek: "Arsip Proyek.",
-    keahlianTeknik: "Keahlian Teknik",
-    riwayatAkademis: "Riwayat Akademis",
+    arsipProyek: "Arsip Proyek",
+    keterampilanTeknis: "Keterampilan Teknis",
+    riwayatAkademik: "Riwayat Akademik",
   },
   en: {
     profil: "Profile",
@@ -22,7 +22,7 @@ export const translations = {
     impact: "Impact",
     viewProject: "View Project",
     arsipProyek: "Project Archive.",
-    keahlianTeknik: "Technical Skills",
-    riwayatAkademis: "Academic History",
+    keterampilanTeknis: "Technical Skills",
+    riwayatAkademik: "Academic History",
   },
 };

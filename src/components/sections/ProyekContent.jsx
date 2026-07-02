@@ -6,7 +6,6 @@ import siakadImg from "../../assets/siakad.png";
 import apikperpusImg from "../../assets/apikperpus.png";
 import webkuImg from "../../assets/webku.png";
 
-// 1. Komponen Header
 function SectionHeader({ title, subtitle }) {
   return (
     <div className="flex items-baseline gap-4 mb-12">
@@ -18,7 +17,6 @@ function SectionHeader({ title, subtitle }) {
   );
 }
 
-// 2. Komponen Kartu Proyek (Menerima props 'lang')
 function ProjectCard({ project, index, lang }) {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
@@ -36,7 +34,6 @@ function ProjectCard({ project, index, lang }) {
         index % 2 !== 0 ? "lg:[&>*:first-child]:order-2" : ""
       }`}
     >
-      {/* KARTU GAMBAR */}
       <a
         href={project.link}
         target="_blank"
@@ -63,7 +60,6 @@ function ProjectCard({ project, index, lang }) {
         </div>
       </a>
 
-      {/* KONTEN DETAIL */}
       <div className="space-y-6">
         <div className="space-y-2">
           <p className="text-sm uppercase tracking-[0.3em] text-blue-400">
@@ -145,7 +141,6 @@ function ProjectCard({ project, index, lang }) {
   );
 }
 
-// 3. Komponen Utama Halaman Proyek (Menangkap props 'lang')
 export default function ProyekContent({ lang }) {
   const projectsData = [
     {
@@ -160,11 +155,11 @@ export default function ProyekContent({ lang }) {
       },
       Tantangan: {
         id: "Merancang antarmuka Point of Sale yang mampu menampilkan data produk, proses transaksi, dan ringkasan penjualan secara cepat tanpa membingungkan pengguna.",
-        en: "Designing a high-performance Point of Sale (POS) interface capable of executing real-time transactions and dynamic sales summary without adding UI friction.",
+        en: "Designing a Point of Sale interface capable of displaying product data, transaction processes, and sales summaries quickly, without confusing the user.",
       },
       Dampak: {
         id: "Menyediakan alur transaksi yang lebih efisien melalui dashboard interaktif, pencatatan penjualan, dan tampilan yang responsif di berbagai perangkat.",
-        en: "Optimized operational speed by engineering responsive web cashiers, minimizing checkout delay, and presenting real-time financial tracking charts.",
+        en: "Provides a more efficient transaction workflow through an interactive dashboard, sales recording, and a responsive interface across various devices.",
       },
       Fitur: {
         id: [
@@ -194,11 +189,11 @@ export default function ProyekContent({ lang }) {
       Peran: { id: "Fullstack Web Developer", en: "Fullstack Web Developer" },
       Tantangan: {
         id: "Mengembangkan sistem peminjaman ruangan kampus yang mampu mengelola data ruangan, proses pengajuan, persetujuan, dan pemantauan peminjaman secara digital.",
-        en: "Developing a robust digitized booking system to handle concurrent room reservation requests, approval flows, and real-time availability states.",
+        en: "Developing a campus room booking system capable of digitally managing room data, as well as the processes for booking requests, approvals, and monitoring.",
       },
       Dampak: {
         id: "Membantu digitalisasi administrasi peminjaman ruangan kampus sehingga proses reservasi menjadi lebih terstruktur, efisien, dan mudah dipantau.",
-        en: "Replaced slow manual paper bureaucracy into a fast web ecosystem—enabling instant status updates and reducing booking friction for campus members.",
+        en: "Facilitates the digitization of campus room booking administration, making the reservation process more structured, efficient, and easy to monitor.",
       },
       Fitur: {
         id: [
@@ -230,11 +225,11 @@ export default function ProyekContent({ lang }) {
       Peran: { id: "Fullstack Web Developer", en: "Fullstack Web Developer" },
       Tantangan: {
         id: "Mengintegrasikan data akademik seperti mahasiswa, dosen, mata kuliah, dan nilai ke dalam satu sistem yang terstruktur dan mudah dikelola.",
-        en: "Architecting a unified, secure database to interconnect academic assets—such as students, lecturers, classes, and grade reports into a logical relational workflow.",
+        en: "Integrating academic data—such as students, lecturers, courses, and grades—into a single, structured, and easily manageable system.",
       },
       Dampak: {
         id: "Menyederhanakan proses administrasi akademik melalui pengelolaan data terpusat dan fitur autentikasi pengguna.",
-        en: "Centralized administrative data management and deployed user access control systems to accelerate processing academic rosters and grades.",
+        en: "Streamlining academic administrative processes through centralized data management and user authentication features.",
       },
       Fitur: {
         id: [
@@ -268,11 +263,11 @@ export default function ProyekContent({ lang }) {
       Peran: { id: "Frontend Developer", en: "Frontend Developer" },
       Tantangan: {
         id: "Menyederhanakan pengelolaan dan pencarian koleksi buku melalui antarmuka digital yang mudah dipahami oleh pengguna.",
-        en: "Simplifying catalog management and book index search journeys by reducing interactive layers on user interfaces.",
+        en: "Streamlining the management and searching of book collections through a user-friendly digital interface.",
       },
       Dampak: {
         id: "Meningkatkan aksesibilitas informasi perpustakaan dan mempermudah proses pencarian koleksi secara online.",
-        en: "Boosted digital book exploration rates and created clean, user-friendly digital library access paths for students.",
+        en: "Improving the accessibility of library information and simplifying the process of searching for collections online.",
       },
       Fitur: {
         id: [
@@ -302,11 +297,11 @@ export default function ProyekContent({ lang }) {
       Peran: { id: "Frontend Developer", en: "Frontend Developer" },
       Tantangan: {
         id: "Menyajikan informasi kampus dalam satu portal yang ringan, responsif, dan mudah diakses oleh mahasiswa maupun calon mahasiswa.",
-        en: "Compressing asset sizes to present comprehensive educational profiles into a highly responsive and lightweight gateway hub.",
+        en: "Presenting campus information through a single portal that is lightweight, responsive, and easily accessible to both current and prospective students.",
       },
       Dampak: {
         id: "Mempermudah akses terhadap informasi akademik dan profil kampus melalui media digital.",
-        en: "Improved public engagement metrics and lowered initial loading speeds for students finding official campus news.",
+        en: "Facilitate access to academic information and campus profiles via digital media.",
       },
       Fitur: {
         id: [

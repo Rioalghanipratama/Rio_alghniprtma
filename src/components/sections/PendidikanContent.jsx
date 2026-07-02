@@ -1,7 +1,6 @@
 import React from "react";
 import { translations } from "../../data/translations";
 
-// Komponen kecil khusus untuk Pendidikan
 function SectionHeader({ title, subtitle }) {
   return (
     <div className="flex items-baseline gap-4 mb-12">
@@ -33,7 +32,7 @@ function EduItem({ school, degree, period, current }) {
 export default function PendidikanContent({ lang }) {
   return (
     <div className="space-y-16">
-      <SectionHeader title={translations[lang].riwayatAkademis} subtitle="03" />
+      <SectionHeader title={translations[lang].riwayatAkademik} subtitle="03" />
       <div className="space-y-16">
         <EduItem
           school="Universitas Komputama Majenang"

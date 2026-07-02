@@ -16,7 +16,6 @@ export default function ProjectCard({ project, index }) {
     <div
       className={`grid grid-cols-1 lg:grid-cols-2 gap-10 items-center ${index % 2 !== 0 ? "lg:[&>*:first-child]:order-2" : ""}`}
     >
-      {/* KARTU GAMBAR DENGAN EFEK HOVER GLOW */}
       <a
         href={project.link}
         target="_blank"
@@ -43,7 +42,6 @@ export default function ProjectCard({ project, index }) {
         </div>
       </a>
 
-      {/* KONTEN DETAIL PROYEK */}
       <div className="space-y-6">
         <div className="space-y-2">
           <p className="text-sm uppercase tracking-[0.3em] text-blue-400">
@@ -51,7 +49,6 @@ export default function ProjectCard({ project, index }) {
           </p>
           <h3 className="text-4xl font-bold text-white">{project.title}</h3>
         </div>
-        {/* ... render detail role, challenge, impact, features, dan tech stack seperti kode asli Anda ... */}
         <div className="pt-4">
           <a
             href={project.link}

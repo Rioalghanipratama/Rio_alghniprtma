@@ -35,7 +35,10 @@ function SkillGroup({ title, skills }) {
 export default function KeahlianContent({ lang }) {
   return (
     <div className="space-y-16">
-      <SectionHeader title={translations[lang].keahlianTeknik} subtitle="02" />
+      <SectionHeader
+        title={translations[lang].keterampilanTeknis}
+        subtitle="02"
+      />
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-12">
         <SkillGroup

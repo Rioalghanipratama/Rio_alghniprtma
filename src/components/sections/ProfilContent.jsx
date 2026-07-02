@@ -1,7 +1,6 @@
 import React from "react";
 import { ShieldCheck, Zap } from "lucide-react";
 
-// Komponen kecil khusus untuk Profil
 function StatBox({ icon, title, desc }) {
   return (
     <div className="p-8 rounded-[2rem] bg-white/5 border border-white/10 hover:border-blue-500/20 hover:bg-white/[0.07] transition-all duration-700 group hover:-translate-y-1">
@@ -55,8 +54,8 @@ export default function ProfilContent({ lang }) {
       ) : (
         <>
           <p className="max-w-2xl text-lg leading-relaxed text-soft font-light">
-            The world of technology has fascinated me ever since I pursued my
-            education at
+            The world of technology has always been something that has
+            interested me since I was studying at
             <a
               href="https://smkdaka.sch.id/"
               target="_blank"
@@ -65,13 +64,13 @@ export default function ProfilContent({ lang }) {
             >
               SMK Darussalam Karangpucung
             </a>
-            majoring in Computer and Network Engineering (TKJ). That experience
-            introduced me to how technology can be harnessed to engineer
-            impactful solutions, optimize operational workflows, and solve
-            complex problems more effectively.
+            majoring in Computer and Network Engineering. From there, I began to
+            understand how technology can be used to create beneficial
+            solutions, streamline workflows, and help resolve various issues
+            more effectively.
           </p>
           <p className="max-w-2xl text-lg leading-relaxed text-soft font-light">
-            This growing passion drove me to continue my studies at
+            This interest led me to continue my education at
             <a
               href="https://unikma.ac.id/"
               target="_blank"
@@ -80,11 +79,11 @@ export default function ProfilContent({ lang }) {
             >
               Universitas Komputama Majenang
             </a>
-            under the Information Systems (SI) department, while deepening my
-            proficiency in modern web development, interface design, and user
-            experience. Currently, I focus on building web-based information
-            systems that seamlessly combine robust functionality, usability, and
-            responsive design.
+            in the Information Systems study program, while also deepening my
+            skills in modern web development, interface design, and user
+            experience. Currently, I focus on developing web-based information
+            systems that combine functionality, ease of use, and responsive
+            design.
           </p>
         </>
       )}
@@ -96,16 +95,16 @@ export default function ProfilContent({ lang }) {
           desc={
             lang === "id"
               ? "Mengembangkan sistem informasi berbasis web yang membantu menyelesaikan kebutuhan administrasi, akademik, dan operasional."
-              : "Developing web-based information systems tailored to streamline administrative, academic, and business workflows."
+              : "Developing a web-based information system that helps address administrative, academic, and operational needs."
           }
         />
         <StatBox
           icon={<Zap className="text-yellow-400" />}
-          title="UI-Focused Development"
+          title="UI-Focused Developer"
           desc={
             lang === "id"
               ? "Menggabungkan fungsionalitas dan desain untuk menciptakan pengalaman pengguna yang modern, responsif, dan mudah digunakan."
-              : "Bridging solid programming functionality with clean interface aesthetics for an immersive, cross-device user experience."
+              : "Combining functionality and design to create a modern, responsive, and user-friendly experience."
           }
         />
       </div>
