@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useSpring } from "framer-motion";
 import Sidebar from "./components/layout/Sidebar";
 import ProfilContent from "./components/sections/ProfilContent";
 import ProyekContent from "./components/sections/ProyekContent";
@@ -10,6 +10,50 @@ export default function App() {
   const [activeTab, setActiveTab] = useState("profil");
   const [loaded, setLoaded] = useState(false);
   const [lang, setLang] = useState("id");
+
+  const [isHovered, setIsHovered] = useState(false);
+  const [isClicked, setIsClicked] = useState(false);
+
+  const [rawMousePos, setRawMousePos] = useState({ x: -100, y: -100 });
+
+  const auraX = useSpring(-100, { stiffness: 220, damping: 26 });
+  const auraY = useSpring(-100, { stiffness: 220, damping: 26 });
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      setRawMousePos({ x: e.clientX - 3, y: e.clientY - 3 });
+
+      const auraSize = isHovered ? 52 : 24; // w-13 (52px) vs w-6 (24px)
+      auraX.set(e.clientX - auraSize / 2);
+      auraY.set(e.clientY - auraSize / 2);
+    };
+
+    const handleMouseOver = (e) => {
+      const target = e.target;
+      const isInteractive =
+        target.tagName === "BUTTON" ||
+        target.tagName === "A" ||
+        target.closest("button") ||
+        target.closest("a");
+
+      setIsHovered(!!isInteractive);
+    };
+
+    const handleMouseDown = () => setIsClicked(true);
+    const handleMouseUp = () => setIsClicked(false);
+
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mouseover", handleMouseOver);
+    window.addEventListener("mousedown", handleMouseDown);
+    window.addEventListener("mouseup", handleMouseUp);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseover", handleMouseOver);
+      window.removeEventListener("mousedown", handleMouseDown);
+      window.removeEventListener("mouseup", handleMouseUp);
+    };
+  }, [auraX, auraY, isHovered]);
 
   useEffect(() => {
     const id = requestAnimationFrame(() => setLoaded(true));
@@ -24,7 +68,46 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-dark text-[#a0a0a0] font-light selection:bg-blue-500/30 overflow-x-hidden">
+    <div className="min-h-screen bg-dark text-[#a0a0a0] font-light selection:bg-blue-500/30 overflow-x-hidden lg:cursor-none [&_a]:cursor-none [&_button]:cursor-none">
+      <div
+        className="pointer-events-none fixed w-1.5 h-1.5 rounded-full bg-blue-400 z-[10000] hidden lg:block shadow-[0_0_10px_rgba(96,165,250,1)]"
+        style={{
+          left: rawMousePos.x,
+          top: rawMousePos.y,
+        }}
+      />
+
+      <motion.div
+        className="pointer-events-none fixed rounded-full z-[9999] hidden lg:block mix-blend-screen transition-colors duration-300"
+        style={{
+          x: auraX,
+          y: auraY,
+        }}
+        animate={{
+          width: isHovered ? "52px" : "24px",
+          height: isHovered ? "52px" : "24px",
+          backgroundColor: isClicked
+            ? "rgba(59, 130, 246, 0.5)"
+            : isHovered
+              ? "rgba(59, 130, 246, 0.25)"
+              : "rgba(59, 130, 246, 0.03)",
+          borderColor: isHovered
+            ? "rgba(147, 197, 253, 0.9)"
+            : "rgba(96, 165, 250, 0.4)",
+          borderWidth: isHovered ? "2px" : "1px",
+          scale: isClicked ? 0.7 : 1,
+          boxShadow: isClicked
+            ? "0 0 35px rgba(59, 130, 246, 0.9)"
+            : isHovered
+              ? "0 0 25px rgba(59, 130, 246, 0.6)"
+              : "0 0 12px rgba(59, 130, 246, 0.2)",
+        }}
+        transition={{
+          scale: { type: "spring", stiffness: 500, damping: 15 },
+          default: { type: "tween", ease: "backOut", duration: 0.25 },
+        }}
+      />
+
       <div className="fixed inset-0 z-0">
         <div className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] rounded-full bg-blue-900/10 blur-[150px] animate-pulse"></div>
         <div
