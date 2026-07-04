@@ -62,7 +62,7 @@ export default function ProfilContent({ lang }) {
               rel="noreferrer"
               className="text-white hover:text-blue-400 transition-all duration-300 ml-1 mr-1"
             >
-              SMK Darussalam Karangpucung
+              Darussalam Karangpucung Vocational High School
             </a>
             majoring in Computer and Network Engineering. From there, I began to
             understand how technology can be used to create beneficial
@@ -77,7 +77,7 @@ export default function ProfilContent({ lang }) {
               rel="noreferrer"
               className="text-white hover:text-blue-400 transition-all duration-300 ml-1 mr-1"
             >
-              Universitas Komputama Majenang
+              Komputama Majenang University
             </a>
             in the Information Systems study program, while also deepening my
             skills in modern web development, interface design, and user
