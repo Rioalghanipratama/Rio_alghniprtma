@@ -1,5 +1,5 @@
 import React from "react";
-import { motion } from "framer-motion"; // Import framer-motion secara utuh
+import { motion } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
 import { BsGithub } from "react-icons/bs";
 import { Mail, Phone } from "lucide-react";
@@ -23,7 +23,6 @@ export default function Sidebar({ activeTab, setActiveTab, sections, lang }) {
               <span className="text-muted">Pratama</span>
             </h1>
 
-            {/* SINKRONISASI 2: ANIMASI TEKS KEAHLIAN (KINETIK & MAGNETIK) */}
             <motion.div
               whileHover={{
                 scale: 1.03,
@@ -53,15 +52,12 @@ export default function Sidebar({ activeTab, setActiveTab, sections, lang }) {
           </div>
         </div>
 
-        {/* SINKRONISASI 3: NAVIGASI MENU DENGAN EFEK INTEGRASI PEGAS */}
         <nav className="flex flex-col space-y-4">
           {Object.keys(sections).map((key) => (
             <motion.button
               key={key}
               onClick={() => setActiveTab(key)}
-              // Bergeser elastis ke kanan mengimbangi hisapan cincin aura kursor
               whileHover={{ x: activeTab === key ? 4 : 8 }}
-              // Kompresi klik menciut seirama kuncupan inti kursor
               whileTap={{ scale: 0.96 }}
               transition={{ type: "spring", stiffness: 400, damping: 20 }}
               className={`group flex items-center gap-4 text-left transition-all duration-300 lg:cursor-none ${
@@ -82,7 +78,6 @@ export default function Sidebar({ activeTab, setActiveTab, sections, lang }) {
           ))}
         </nav>
 
-        {/* SINKRONISASI 4: TOMBOL KONTAK SOSIAL MEDIA */}
         <div className="flex items-center gap-6 pt-8 border-t border-white/10">
           <motion.div
             whileHover={{ y: -3, scale: 1.05 }}
