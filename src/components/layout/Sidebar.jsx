@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion"; // Import framer-motion secara utuh
 import { TypeAnimation } from "react-type-animation";
 import { BsGithub } from "react-icons/bs";
 import { Mail, Phone } from "lucide-react";
@@ -22,33 +23,51 @@ export default function Sidebar({ activeTab, setActiveTab, sections, lang }) {
               <span className="text-muted">Pratama</span>
             </h1>
 
-            <TypeAnimation
-              key="en-anim"
-              sequence={[
-                "Full-stack Web Developer",
-                2000,
-                "Information System Builder",
-                2000,
-                "UI-Focused Developer",
-                2000,
-              ]}
-              wrapper="p"
-              speed={50}
-              repeat={Infinity}
-              className="text-sm tracking-[0.15em] text-blue-400 font-bold drop-shadow-[0_0_8px_rgba(59,130,246,0.5)]"
-            />
+            {/* SINKRONISASI 2: ANIMASI TEKS KEAHLIAN (KINETIK & MAGNETIK) */}
+            <motion.div
+              whileHover={{
+                scale: 1.03,
+                x: 6,
+                filter: "drop-shadow(0 0 12px rgba(59,130,246,0.8))",
+              }}
+              whileTap={{ scale: 0.95, x: 2 }}
+              transition={{ type: "spring", stiffness: 400, damping: 18 }}
+              className="inline-block origin-left select-none cursor-none"
+            >
+              <TypeAnimation
+                key="en-anim"
+                sequence={[
+                  "Full-stack Web Developer",
+                  2000,
+                  "Information System Builder",
+                  2000,
+                  "UI-Focused Developer",
+                  2000,
+                ]}
+                wrapper="p"
+                speed={50}
+                repeat={Infinity}
+                className="text-sm tracking-[0.15em] text-blue-400 font-bold drop-shadow-[0_0_8px_rgba(59,130,246,0.5)]"
+              />
+            </motion.div>
           </div>
         </div>
 
+        {/* SINKRONISASI 3: NAVIGASI MENU DENGAN EFEK INTEGRASI PEGAS */}
         <nav className="flex flex-col space-y-4">
           {Object.keys(sections).map((key) => (
-            <button
+            <motion.button
               key={key}
               onClick={() => setActiveTab(key)}
-              className={`group flex items-center gap-4 text-left transition-all duration-300 ${
+              // Bergeser elastis ke kanan mengimbangi hisapan cincin aura kursor
+              whileHover={{ x: activeTab === key ? 4 : 8 }}
+              // Kompresi klik menciut seirama kuncupan inti kursor
+              whileTap={{ scale: 0.96 }}
+              transition={{ type: "spring", stiffness: 400, damping: 20 }}
+              className={`group flex items-center gap-4 text-left transition-all duration-300 lg:cursor-none ${
                 activeTab === key
                   ? "text-white translate-x-4"
-                  : "hover:text-white hover:translate-x-2"
+                  : "hover:text-white"
               }`}
             >
               <span
@@ -59,26 +78,50 @@ export default function Sidebar({ activeTab, setActiveTab, sections, lang }) {
               <span className="text-xs uppercase tracking-[0.4em] font-black">
                 {menuLabels[key]}
               </span>
-            </button>
+            </motion.button>
           ))}
         </nav>
 
+        {/* SINKRONISASI 4: TOMBOL KONTAK SOSIAL MEDIA */}
         <div className="flex items-center gap-6 pt-8 border-t border-white/10">
-          <SidebarContact
-            icon={<BsGithub size={18} />}
-            label="GitHub"
-            href="https://github.com/Rioalghanipratama"
-          />
-          <SidebarContact
-            icon={<Mail size={18} />}
-            label="Email"
-            href="mailto:pratamagaming94@gmail.com"
-          />
-          <SidebarContact
-            icon={<Phone size={18} />}
-            label="WhatsApp"
-            href="https://wa.me/6281390148362"
-          />
+          <motion.div
+            whileHover={{ y: -3, scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ type: "spring", stiffness: 400, damping: 15 }}
+            className="lg:cursor-none"
+          >
+            <SidebarContact
+              icon={<BsGithub size={18} />}
+              label="GitHub"
+              href="https://github.com/Rioalghanipratama"
+            />
+          </motion.div>
+
+          <motion.div
+            whileHover={{ y: -3, scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ type: "spring", stiffness: 400, damping: 15 }}
+            className="lg:cursor-none"
+          >
+            <SidebarContact
+              icon={<Mail size={18} />}
+              label="Email"
+              href="mailto:pratamagaming94@gmail.com"
+            />
+          </motion.div>
+
+          <motion.div
+            whileHover={{ y: -3, scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ type: "spring", stiffness: 400, damping: 15 }}
+            className="lg:cursor-none"
+          >
+            <SidebarContact
+              icon={<Phone size={18} />}
+              label="WhatsApp"
+              href="https://wa.me/6281390148362"
+            />
+          </motion.div>
         </div>
       </div>
     </aside>

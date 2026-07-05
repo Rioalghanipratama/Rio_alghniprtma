@@ -11,19 +11,24 @@ export default function App() {
   const [loaded, setLoaded] = useState(false);
   const [lang, setLang] = useState("id");
 
+  // Status interaksi untuk kursor jeli global
   const [isHovered, setIsHovered] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
 
+  // Posisi mentah koordinat mouse (Lapisan 1: Titik Inti Instan)
   const [rawMousePos, setRawMousePos] = useState({ x: -100, y: -100 });
 
+  // Pegas halus untuk efek tertinggal (Lapisan 2: Cincin Aura)
   const auraX = useSpring(-100, { stiffness: 220, damping: 26 });
   const auraY = useSpring(-100, { stiffness: 220, damping: 26 });
 
   useEffect(() => {
     const handleMouseMove = (e) => {
+      // Set posisi titik inti instan (dikurangi setengah ukuran w-1.5 = 6px)
       setRawMousePos({ x: e.clientX - 3, y: e.clientY - 3 });
 
-      const auraSize = isHovered ? 52 : 24; // w-13 (52px) vs w-6 (24px)
+      // Set posisi pusat cincin aura secara dinamis mengikuti perubahan ukuran hover
+      const auraSize = isHovered ? 52 : 24;
       auraX.set(e.clientX - auraSize / 2);
       auraY.set(e.clientY - auraSize / 2);
     };
@@ -69,6 +74,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-dark text-[#a0a0a0] font-light selection:bg-blue-500/30 overflow-x-hidden lg:cursor-none [&_a]:cursor-none [&_button]:cursor-none">
+      {/* LAPISAN 1: TITIK INTI KURSOR (PRESISI TINGGI - INSTAN) */}
       <div
         className="pointer-events-none fixed w-1.5 h-1.5 rounded-full bg-blue-400 z-[10000] hidden lg:block shadow-[0_0_10px_rgba(96,165,250,1)]"
         style={{
@@ -77,6 +83,7 @@ export default function App() {
         }}
       />
 
+      {/* LAPISAN 2: CINCIN AURA LUAR (EFEK JELI MENGEJAR + RESPONS HOVER/KLIK) */}
       <motion.div
         className="pointer-events-none fixed rounded-full z-[9999] hidden lg:block mix-blend-screen transition-colors duration-300"
         style={{
@@ -108,6 +115,7 @@ export default function App() {
         }}
       />
 
+      {/* Latar Belakang Dekoratif Ambient */}
       <div className="fixed inset-0 z-0">
         <div className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] rounded-full bg-blue-900/10 blur-[150px] animate-pulse"></div>
         <div
@@ -117,13 +125,17 @@ export default function App() {
         <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"></div>
       </div>
 
+      {/* SINKRONISASI 1: TOMBOL SAKELAR BAHASA GLOBAL */}
       <div className="fixed top-6 right-6 z-50">
-        <button
+        <motion.button
           onClick={() => setLang((prev) => (prev === "id" ? "en" : "id"))}
-          className="px-4 py-2 bg-white/5 border border-white/10 rounded-full text-xs font-bold text-white hover:bg-blue-500/20 hover:border-blue-500/50 backdrop-blur-md transition-all duration-300 uppercase tracking-widest shadow-lg"
+          whileHover={{ scale: 1.05, borderColor: "rgba(59, 130, 246, 0.5)" }}
+          whileTap={{ scale: 0.94 }}
+          transition={{ type: "spring", stiffness: 500, damping: 15 }}
+          className="px-4 py-2 bg-white/5 border border-white/10 rounded-full text-xs font-bold text-white hover:bg-blue-500/20 backdrop-blur-md transition-colors duration-300 uppercase tracking-widest shadow-lg"
         >
           🌐 {lang === "id" ? "EN" : "ID"}
-        </button>
+        </motion.button>
       </div>
 
       <div
