@@ -1,16 +1,17 @@
 import React from "react";
+import { motion } from "framer-motion";
 import { translations } from "../../data/translations";
 
-function SectionHeader({ title, subtitle }) {
-  return (
-    <div className="flex items-baseline gap-4 mb-12">
-      <span className="text-sm font-black text-blue-500 tracking-tighter">
-        {subtitle}
-      </span>
-      <h3 className="text-4xl font-bold text-white tracking-tight">{title}</h3>
-    </div>
-  );
-}
+// OPTIMASI: Memoisasi SectionHeader agar tidak re-render
+const SectionHeader = React.memo(({ title, subtitle }) => (
+  <div className="flex items-baseline gap-4 mb-12">
+    <span className="text-sm font-black text-blue-500 tracking-tighter">
+      {subtitle}
+    </span>
+    <h3 className="text-4xl font-bold text-white tracking-tight">{title}</h3>
+  </div>
+));
+SectionHeader.displayName = "SectionHeader";
 
 function SkillGroup({ title, skills }) {
   return (
@@ -19,13 +20,24 @@ function SkillGroup({ title, skills }) {
         {title}
       </h4>
       <div className="flex flex-wrap gap-3">
-        {skills.map((s) => (
-          <span
+        {skills.map((s, idx) => (
+          // OPTIMASI: Efek stagger masuk satu per satu + GPU Acceleration
+          <motion.span
             key={s}
-            className="text-sm text-white hover:text-blue-400 cursor-default transition-colors"
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{
+              type: "spring",
+              stiffness: 300,
+              damping: 25,
+              delay: idx * 0.03,
+            }}
+            whileHover={{ y: -2, color: "#60a5fa" }}
+            className="text-sm text-white cursor-default transition-colors duration-200 inline-block will-change-transform"
           >
             {s}
-          </span>
+          </motion.span>
         ))}
       </div>
     </div>

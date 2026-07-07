@@ -1,10 +1,24 @@
-import React, { useState, useEffect } from "react";
-import { AnimatePresence, motion, useSpring } from "framer-motion";
+import React, { useState, useEffect, Suspense, useRef } from "react";
+import {
+  AnimatePresence,
+  motion,
+  useSpring,
+  useMotionValue,
+} from "framer-motion";
 import Sidebar from "./components/layout/Sidebar";
-import ProfilContent from "./components/sections/ProfilContent";
-import ProyekContent from "./components/sections/ProyekContent";
-import KeahlianContent from "./components/sections/KeahlianContent";
-import PendidikanContent from "./components/sections/PendidikanContent";
+
+const ProfilContent = React.lazy(
+  () => import("./components/sections/ProfilContent"),
+);
+const ProyekContent = React.lazy(
+  () => import("./components/sections/ProyekContent"),
+);
+const KeahlianContent = React.lazy(
+  () => import("./components/sections/KeahlianContent"),
+);
+const PendidikanContent = React.lazy(
+  () => import("./components/sections/PendidikanContent"),
+);
 
 export default function App() {
   const [activeTab, setActiveTab] = useState("profil");
@@ -14,14 +28,27 @@ export default function App() {
   const [isHovered, setIsHovered] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
 
-  const [rawMousePos, setRawMousePos] = useState({ x: -100, y: -100 });
+  const dotRef = useRef(null);
+  const auraX = useMotionValue(-100);
+  const auraY = useMotionValue(-100);
 
-  const auraX = useSpring(-100, { stiffness: 220, damping: 26 });
-  const auraY = useSpring(-100, { stiffness: 220, damping: 26 });
+  const springAuraX = useSpring(auraX, { stiffness: 300, damping: 28 });
+  const springAuraY = useSpring(auraY, { stiffness: 300, damping: 28 });
+
+  const ambientColors = {
+    profil: { topBg: "bg-blue-900/15", bottomBg: "bg-indigo-950/15" },
+    proyek: { topBg: "bg-purple-900/15", bottomBg: "bg-fuchsia-950/15" },
+    keahlian: { topBg: "bg-emerald-900/15", bottomBg: "bg-cyan-950/15" },
+    pendidikan: { topBg: "bg-amber-900/12", bottomBg: "bg-orange-950/15" },
+  };
 
   useEffect(() => {
+    if (window.innerWidth < 1024) return;
+
     const handleMouseMove = (e) => {
-      setRawMousePos({ x: e.clientX - 3, y: e.clientY - 3 });
+      if (dotRef.current) {
+        dotRef.current.style.transform = `translate3d(${e.clientX - 3}px, ${e.clientY - 3}px, 0)`;
+      }
 
       const auraSize = isHovered ? 52 : 24;
       auraX.set(e.clientX - auraSize / 2);
@@ -36,16 +63,18 @@ export default function App() {
         target.closest("button") ||
         target.closest("a");
 
-      setIsHovered(!!isInteractive);
+      setIsHovered((prev) =>
+        prev !== !!isInteractive ? !!isInteractive : prev,
+      );
     };
 
     const handleMouseDown = () => setIsClicked(true);
     const handleMouseUp = () => setIsClicked(false);
 
-    window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("mouseover", handleMouseOver);
-    window.addEventListener("mousedown", handleMouseDown);
-    window.addEventListener("mouseup", handleMouseUp);
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    window.addEventListener("mouseover", handleMouseOver, { passive: true });
+    window.addEventListener("mousedown", handleMouseDown, { passive: true });
+    window.addEventListener("mouseup", handleMouseUp, { passive: true });
 
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
@@ -53,7 +82,7 @@ export default function App() {
       window.removeEventListener("mousedown", handleMouseDown);
       window.removeEventListener("mouseup", handleMouseUp);
     };
-  }, [auraX, auraY, isHovered]);
+  }, [isHovered, auraX, auraY]);
 
   useEffect(() => {
     const id = requestAnimationFrame(() => setLoaded(true));
@@ -68,21 +97,16 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-dark text-[#a0a0a0] font-light selection:bg-blue-500/30 overflow-x-hidden lg:cursor-none [&_a]:cursor-none [&_button]:cursor-none">
+    <div className="min-h-screen bg-dark text-[#a0a0a0] font-light selection:bg-blue-500/30 overflow-x-hidden lg:cursor-none [&_a]:cursor-none [&_button]:cursor-none subpixel-antialiased">
       <div
-        className="pointer-events-none fixed w-1.5 h-1.5 rounded-full bg-blue-400 z-[10000] hidden lg:block shadow-[0_0_10px_rgba(96,165,250,1)]"
-        style={{
-          left: rawMousePos.x,
-          top: rawMousePos.y,
-        }}
+        ref={dotRef}
+        className="pointer-events-none fixed w-1.5 h-1.5 rounded-full bg-blue-400 z-[10000] hidden lg:block shadow-[0_0_10px_rgba(96,165,250,1)] will-change-transform"
+        style={{ transform: "translate3d(-100px, -100px, 0)", left: 0, top: 0 }}
       />
 
       <motion.div
-        className="pointer-events-none fixed rounded-full z-[9999] hidden lg:block mix-blend-screen transition-colors duration-300"
-        style={{
-          x: auraX,
-          y: auraY,
-        }}
+        className="pointer-events-none fixed rounded-full z-[9999] hidden lg:block mix-blend-screen transition-colors duration-300 will-change-transform"
+        style={{ x: springAuraX, y: springAuraY, left: 0, top: 0 }}
         animate={{
           width: isHovered ? "52px" : "24px",
           height: isHovered ? "52px" : "24px",
@@ -108,13 +132,23 @@ export default function App() {
         }}
       />
 
-      <div className="fixed inset-0 z-0">
-        <div className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] rounded-full bg-blue-900/10 blur-[150px] animate-pulse"></div>
-        <div
-          className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-indigo-900/10 blur-[150px] animate-pulse"
-          style={{ animationDelay: "3s" }}
-        ></div>
-        <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"></div>
+      <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+        <motion.div
+          className={`absolute top-[-20%] left-[-10%] w-[60%] h-[60%] rounded-full blur-[150px] ${ambientColors[activeTab].topBg} will-change-transform`}
+          animate={{ scale: [1, 1.03, 1] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className={`absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full blur-[150px] ${ambientColors[activeTab].bottomBg} will-change-transform`}
+          animate={{ scale: [1, 1.05, 1] }}
+          transition={{
+            duration: 12,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1,
+          }}
+        />
+        <div className="absolute inset-0 opacity-[0.02] bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"></div>
       </div>
 
       <div className="fixed top-6 right-6 z-50">
@@ -143,13 +177,21 @@ export default function App() {
           <AnimatePresence mode="wait">
             <motion.div
               key={activeTab}
-              initial={{ opacity: 0, y: 30, scale: 0.98, filter: "blur(10px)" }}
+              initial={{ opacity: 0, y: 20, scale: 0.99, filter: "blur(8px)" }}
               animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
-              exit={{ opacity: 0, y: -20, scale: 0.98, filter: "blur(10px)" }}
-              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              exit={{ opacity: 0, y: -15, scale: 0.99, filter: "blur(8px)" }}
+              transition={{ duration: 0.4, ease: [0.25, 1, 0.5, 1] }}
               className="max-w-3xl"
             >
-              {sections[activeTab]}
+              <Suspense
+                fallback={
+                  <div className="text-xs uppercase tracking-[0.2em] text-white/20 animate-pulse">
+                    Loading...
+                  </div>
+                }
+              >
+                {sections[activeTab]}
+              </Suspense>
             </motion.div>
           </AnimatePresence>
         </main>

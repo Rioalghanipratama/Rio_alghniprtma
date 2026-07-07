@@ -5,7 +5,7 @@ import { BsGithub } from "react-icons/bs";
 import { Mail, Phone } from "lucide-react";
 import SidebarContact from "../atoms/SidebarContact";
 
-export default function Sidebar({ activeTab, setActiveTab, sections, lang }) {
+function Sidebar({ activeTab, setActiveTab, sections, lang }) {
   const menuLabels = {
     profil: lang === "id" ? "Profil" : "Profile",
     proyek: lang === "id" ? "Proyek" : "Projects",
@@ -14,7 +14,7 @@ export default function Sidebar({ activeTab, setActiveTab, sections, lang }) {
   };
 
   return (
-    <aside className="w-full lg:w-[400px] lg:h-screen lg:sticky lg:top-0 p-6 lg:p-16 flex flex-col justify-between border-r border-white/5 bg-black/30 backdrop-blur-xl shadow-2xl">
+    <aside className="w-full lg:w-[400px] lg:h-screen lg:sticky lg:top-0 p-6 lg:p-16 flex flex-col justify-between border-r border-white/5 bg-black/30 backdrop-blur-xl shadow-2xl overflow-hidden">
       <div className="space-y-16">
         <div className="space-y-6">
           <div className="space-y-2">
@@ -31,7 +31,7 @@ export default function Sidebar({ activeTab, setActiveTab, sections, lang }) {
               }}
               whileTap={{ scale: 0.95, x: 2 }}
               transition={{ type: "spring", stiffness: 400, damping: 18 }}
-              className="inline-block origin-left select-none cursor-none"
+              className="inline-block origin-left select-none cursor-none will-change-transform" // OPTIMASI: will-change-transform untuk animasi teks hiasan
             >
               <TypeAnimation
                 key="en-anim"
@@ -60,7 +60,8 @@ export default function Sidebar({ activeTab, setActiveTab, sections, lang }) {
               whileHover={{ x: activeTab === key ? 4 : 8 }}
               whileTap={{ scale: 0.96 }}
               transition={{ type: "spring", stiffness: 400, damping: 20 }}
-              className={`group flex items-center gap-4 text-left transition-all duration-300 lg:cursor-none ${
+              className={`group flex items-center gap-4 text-left transition-all duration-300 lg:cursor-none will-change-transform ${
+                // OPTIMASI: will-change-transform untuk animasi geser menu nav
                 activeTab === key
                   ? "text-white translate-x-4"
                   : "hover:text-white"
@@ -83,7 +84,7 @@ export default function Sidebar({ activeTab, setActiveTab, sections, lang }) {
             whileHover={{ y: -3, scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             transition={{ type: "spring", stiffness: 400, damping: 15 }}
-            className="lg:cursor-none"
+            className="lg:cursor-none will-change-transform" // OPTIMASI: will-change-transform untuk ikon kontak melayang
           >
             <SidebarContact
               icon={<BsGithub size={18} />}
@@ -96,7 +97,7 @@ export default function Sidebar({ activeTab, setActiveTab, sections, lang }) {
             whileHover={{ y: -3, scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             transition={{ type: "spring", stiffness: 400, damping: 15 }}
-            className="lg:cursor-none"
+            className="lg:cursor-none will-change-transform" // OPTIMASI: will-change-transform untuk ikon kontak melayang
           >
             <SidebarContact
               icon={<Mail size={18} />}
@@ -109,7 +110,7 @@ export default function Sidebar({ activeTab, setActiveTab, sections, lang }) {
             whileHover={{ y: -3, scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             transition={{ type: "spring", stiffness: 400, damping: 15 }}
-            className="lg:cursor-none"
+            className="lg:cursor-none will-change-transform" // OPTIMASI: will-change-transform untuk ikon kontak melayang
           >
             <SidebarContact
               icon={<Phone size={18} />}
@@ -122,3 +123,5 @@ export default function Sidebar({ activeTab, setActiveTab, sections, lang }) {
     </aside>
   );
 }
+
+export default React.memo(Sidebar);

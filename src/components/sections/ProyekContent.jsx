@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useRef } from "react";
+import { motion } from "framer-motion";
 import { CheckCircle2, ArrowUpRight } from "lucide-react";
 import andoliImg from "../../assets/andoli.png";
 import sirukaImg from "../../assets/siruka.png";
@@ -6,31 +7,46 @@ import siakadImg from "../../assets/siakad.png";
 import apikperpusImg from "../../assets/apikperpus.png";
 import webkuImg from "../../assets/webku.png";
 
-function SectionHeader({ title, subtitle }) {
-  return (
-    <div className="flex items-baseline gap-4 mb-12">
-      <span className="text-sm font-black text-blue-500 tracking-tighter">
-        {subtitle}
-      </span>
-      <h3 className="text-4xl font-bold text-white tracking-tight">{title}</h3>
-    </div>
-  );
-}
+// Komponen Header Ringan
+const SectionHeader = React.memo(({ title, subtitle }) => (
+  <div className="flex items-baseline gap-4 mb-12">
+    <span className="text-sm font-black text-blue-500 tracking-tighter">
+      {subtitle}
+    </span>
+    <h3 className="text-4xl font-bold text-white tracking-tight">{title}</h3>
+  </div>
+));
+
+SectionHeader.displayName = "SectionHeader";
 
 function ProjectCard({ project, index, lang }) {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  // ─── OPTIMASI 1: ZERO RE-RENDER HOVER POSITION VIA CSS VARIABLE ───
+  const cardRef = useRef(null);
 
   const handleMouseMove = (e) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    setMousePosition({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
-    });
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    // Set nilai koordinat langsung ke CSS Custom Properties (Sangat Ringan, 0% Beban State)
+    cardRef.current.style.setProperty("--mouse-x", `${x}px`);
+    cardRef.current.style.setProperty("--mouse-y", `${y}px`);
   };
 
   return (
-    <div
-      className={`grid grid-cols-1 lg:grid-cols-2 gap-10 items-center ${
+    // ─── OPTIMASI 2: ANIMASI SPRING + HARDWARE ACCELERATION VIA GPU ───
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{
+        type: "spring",
+        stiffness: 260,
+        damping: 25,
+        delay: index * 0.05,
+      }}
+      className={`grid grid-cols-1 lg:grid-cols-2 gap-10 items-center will-change-transform ${
         index % 2 !== 0 ? "lg:[&>*:first-child]:order-2" : ""
       }`}
     >
@@ -38,22 +54,25 @@ function ProjectCard({ project, index, lang }) {
         href={project.link}
         target="_blank"
         rel="noreferrer"
+        ref={cardRef}
         onMouseMove={handleMouseMove}
-        className="group relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/5"
+        className="group relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/5 block will-change-transform"
       >
+        {/* Efek Spotlight Menggunakan CSS Variable (Mulus 60-120FPS) */}
         <div
-          className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+          className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"
           style={{
-            background: `radial-gradient( 600px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(59,130,246,0.15), transparent 40% )`,
+            background: `radial-gradient( 600px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(59,130,246,0.15), transparent 40% )`,
           }}
         />
         <img
           src={project.image}
           alt={project.title}
-          className="w-full aspect-video object-cover transition-transform duration-700 group-hover:scale-105"
+          loading="lazy" // OPTIMASI 3: Lazy Loading Gambar Bawaan Browser
+          className="w-full aspect-video object-cover transition-transform duration-700 group-hover:scale-103 will-change-transform"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/10 to-transparent"></div>
-        <div className="absolute top-6 left-6">
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/10 to-transparent z-0"></div>
+        <div className="absolute top-6 left-6 z-20">
           <span className="px-4 py-2 rounded-full bg-blue-500/20 backdrop-blur-md border border-blue-400/20 text-xs tracking-widest uppercase text-blue-300 font-bold">
             {lang === "id" ? project.status.id : project.status.en}
           </span>
@@ -65,7 +84,9 @@ function ProjectCard({ project, index, lang }) {
           <p className="text-sm uppercase tracking-[0.3em] text-blue-400">
             {lang === "id" ? project.Kategori.id : project.Kategori.en}
           </p>
-          <h3 className="text-4xl font-bold text-white">{project.title}</h3>
+          <h3 className="text-4xl font-bold text-white tracking-tight">
+            {project.title}
+          </h3>
         </div>
 
         <div>
@@ -81,7 +102,7 @@ function ProjectCard({ project, index, lang }) {
           <p className="text-xs uppercase tracking-[0.3em] text-white/30 mb-2">
             {lang === "id" ? "Tantangan" : "Challenge"}
           </p>
-          <p className="text-soft leading-relaxed">
+          <p className="text-soft leading-relaxed text-sm lg:text-base">
             {lang === "id" ? project.Tantangan.id : project.Tantangan.en}
           </p>
         </div>
@@ -90,20 +111,20 @@ function ProjectCard({ project, index, lang }) {
           <p className="text-xs uppercase tracking-[0.3em] text-white/30 mb-2">
             {lang === "id" ? "Dampak" : "Impact"}
           </p>
-          <p className="text-soft leading-relaxed">
+          <p className="text-soft leading-relaxed text-sm lg:text-base">
             {lang === "id" ? project.Dampak.id : project.Dampak.en}
           </p>
         </div>
 
         <div className="flex flex-wrap gap-2">
           {(lang === "id" ? project.Fitur.id : project.Fitur.en).map(
-            (feature, idx) => (
+            (feature) => (
               <div
-                key={idx}
+                key={feature} // OPTIMASI 4: Menggunakan nilai unik teks fitur sebagai key statis
                 className="flex items-center gap-1 px-3 py-1 rounded-full bg-white/5 border border-white/10"
               >
-                <CheckCircle2 size={12} />
-                <span className="text-xs">{feature}</span>
+                <CheckCircle2 size={12} className="text-blue-400" />
+                <span className="text-xs text-white/80">{feature}</span>
               </div>
             ),
           )}
@@ -112,8 +133,8 @@ function ProjectCard({ project, index, lang }) {
         <div className="flex flex-wrap gap-3 pt-2">
           {project.tech.map((tech) => (
             <span
-              key={tech}
-              className="px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-sm text-white/70 hover:text-blue-400 transition-colors"
+              key={tech} // OPTIMASI 5: Menggunakan nama teknologi sebagai key statis
+              className="px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-sm text-white/70 hover:text-blue-400 transition-colors duration-200"
             >
               {tech}
             </span>
@@ -132,12 +153,12 @@ function ProjectCard({ project, index, lang }) {
             </span>
             <ArrowUpRight
               size={18}
-              className="group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform"
+              className="group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform duration-300"
             />
           </a>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
@@ -325,13 +346,18 @@ export default function ProyekContent({ lang }) {
   ];
 
   return (
-    <div className="space-y-16">
+    <div className="space-y-20">
       <SectionHeader
         title={lang === "id" ? "Arsip Proyek" : "Project Archive"}
         subtitle="01"
       />
       {projectsData.map((project, index) => (
-        <ProjectCard key={index} project={project} index={index} lang={lang} />
+        <ProjectCard
+          key={project.title}
+          project={project}
+          index={index}
+          lang={lang}
+        /> // OPTIMASI 6: Menggunakan title unik sebagai key utama loop
       ))}
     </div>
   );
