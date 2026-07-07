@@ -31,7 +31,7 @@ function Sidebar({ activeTab, setActiveTab, sections, lang }) {
               }}
               whileTap={{ scale: 0.95, x: 2 }}
               transition={{ type: "spring", stiffness: 400, damping: 18 }}
-              className="inline-block origin-left select-none cursor-none will-change-transform" // OPTIMASI: will-change-transform untuk animasi teks hiasan
+              className="inline-block origin-left select-none cursor-none will-change-transform"
             >
               <TypeAnimation
                 key="en-anim"
@@ -61,7 +61,6 @@ function Sidebar({ activeTab, setActiveTab, sections, lang }) {
               whileTap={{ scale: 0.96 }}
               transition={{ type: "spring", stiffness: 400, damping: 20 }}
               className={`group flex items-center gap-4 text-left transition-all duration-300 lg:cursor-none will-change-transform ${
-                // OPTIMASI: will-change-transform untuk animasi geser menu nav
                 activeTab === key
                   ? "text-white translate-x-4"
                   : "hover:text-white"
@@ -84,7 +83,7 @@ function Sidebar({ activeTab, setActiveTab, sections, lang }) {
             whileHover={{ y: -3, scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             transition={{ type: "spring", stiffness: 400, damping: 15 }}
-            className="lg:cursor-none will-change-transform" // OPTIMASI: will-change-transform untuk ikon kontak melayang
+            className="lg:cursor-none will-change-transform"
           >
             <SidebarContact
               icon={<BsGithub size={18} />}
@@ -97,7 +96,7 @@ function Sidebar({ activeTab, setActiveTab, sections, lang }) {
             whileHover={{ y: -3, scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             transition={{ type: "spring", stiffness: 400, damping: 15 }}
-            className="lg:cursor-none will-change-transform" // OPTIMASI: will-change-transform untuk ikon kontak melayang
+            className="lg:cursor-none will-change-transform"
           >
             <SidebarContact
               icon={<Mail size={18} />}
@@ -110,7 +109,7 @@ function Sidebar({ activeTab, setActiveTab, sections, lang }) {
             whileHover={{ y: -3, scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             transition={{ type: "spring", stiffness: 400, damping: 15 }}
-            className="lg:cursor-none will-change-transform" // OPTIMASI: will-change-transform untuk ikon kontak melayang
+            className="lg:cursor-none will-change-transform"
           >
             <SidebarContact
               icon={<Phone size={18} />}

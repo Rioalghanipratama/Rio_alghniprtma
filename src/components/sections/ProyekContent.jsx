@@ -7,7 +7,6 @@ import siakadImg from "../../assets/siakad.png";
 import apikperpusImg from "../../assets/apikperpus.png";
 import webkuImg from "../../assets/webku.png";
 
-// Komponen Header Ringan
 const SectionHeader = React.memo(({ title, subtitle }) => (
   <div className="flex items-baseline gap-4 mb-12">
     <span className="text-sm font-black text-blue-500 tracking-tighter">
@@ -20,7 +19,6 @@ const SectionHeader = React.memo(({ title, subtitle }) => (
 SectionHeader.displayName = "SectionHeader";
 
 function ProjectCard({ project, index, lang }) {
-  // ─── OPTIMASI 1: ZERO RE-RENDER HOVER POSITION VIA CSS VARIABLE ───
   const cardRef = useRef(null);
 
   const handleMouseMove = (e) => {
@@ -29,13 +27,11 @@ function ProjectCard({ project, index, lang }) {
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
 
-    // Set nilai koordinat langsung ke CSS Custom Properties (Sangat Ringan, 0% Beban State)
     cardRef.current.style.setProperty("--mouse-x", `${x}px`);
     cardRef.current.style.setProperty("--mouse-y", `${y}px`);
   };
 
   return (
-    // ─── OPTIMASI 2: ANIMASI SPRING + HARDWARE ACCELERATION VIA GPU ───
     <motion.div
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -58,7 +54,6 @@ function ProjectCard({ project, index, lang }) {
         onMouseMove={handleMouseMove}
         className="group relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/5 block will-change-transform"
       >
-        {/* Efek Spotlight Menggunakan CSS Variable (Mulus 60-120FPS) */}
         <div
           className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"
           style={{
@@ -68,7 +63,7 @@ function ProjectCard({ project, index, lang }) {
         <img
           src={project.image}
           alt={project.title}
-          loading="lazy" // OPTIMASI 3: Lazy Loading Gambar Bawaan Browser
+          loading="lazy"
           className="w-full aspect-video object-cover transition-transform duration-700 group-hover:scale-103 will-change-transform"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/10 to-transparent z-0"></div>
@@ -120,7 +115,7 @@ function ProjectCard({ project, index, lang }) {
           {(lang === "id" ? project.Fitur.id : project.Fitur.en).map(
             (feature) => (
               <div
-                key={feature} // OPTIMASI 4: Menggunakan nilai unik teks fitur sebagai key statis
+                key={feature}
                 className="flex items-center gap-1 px-3 py-1 rounded-full bg-white/5 border border-white/10"
               >
                 <CheckCircle2 size={12} className="text-blue-400" />
@@ -133,7 +128,7 @@ function ProjectCard({ project, index, lang }) {
         <div className="flex flex-wrap gap-3 pt-2">
           {project.tech.map((tech) => (
             <span
-              key={tech} // OPTIMASI 5: Menggunakan nama teknologi sebagai key statis
+              key={tech}
               className="px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-sm text-white/70 hover:text-blue-400 transition-colors duration-200"
             >
               {tech}
@@ -357,7 +352,7 @@ export default function ProyekContent({ lang }) {
           project={project}
           index={index}
           lang={lang}
-        /> // OPTIMASI 6: Menggunakan title unik sebagai key utama loop
+        />
       ))}
     </div>
   );

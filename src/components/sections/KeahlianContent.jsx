@@ -2,7 +2,6 @@ import React from "react";
 import { motion } from "framer-motion";
 import { translations } from "../../data/translations";
 
-// OPTIMASI: Memoisasi SectionHeader agar tidak re-render
 const SectionHeader = React.memo(({ title, subtitle }) => (
   <div className="flex items-baseline gap-4 mb-12">
     <span className="text-sm font-black text-blue-500 tracking-tighter">
@@ -21,7 +20,6 @@ function SkillGroup({ title, skills }) {
       </h4>
       <div className="flex flex-wrap gap-3">
         {skills.map((s, idx) => (
-          // OPTIMASI: Efek stagger masuk satu per satu + GPU Acceleration
           <motion.span
             key={s}
             initial={{ opacity: 0, scale: 0.95 }}

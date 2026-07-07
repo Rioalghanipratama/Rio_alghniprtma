@@ -2,7 +2,6 @@ import React from "react";
 import { motion } from "framer-motion";
 import { translations } from "../../data/translations";
 
-// OPTIMASI: Memoisasi SectionHeader
 const SectionHeader = React.memo(({ title, subtitle }) => (
   <div className="flex items-baseline gap-4 mb-12">
     <span className="text-sm font-black text-blue-500 tracking-tighter">
@@ -15,7 +14,6 @@ SectionHeader.displayName = "SectionHeader";
 
 function EduItem({ school, degree, period, current, index }) {
   return (
-    // OPTIMASI: Animasi masuk kinetik menggunakan GPU Acceleration
     <motion.div
       initial={{ opacity: 0, x: -20 }}
       whileInView={{ opacity: 1, x: 0 }}
