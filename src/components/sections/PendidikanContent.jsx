@@ -12,18 +12,10 @@ const SectionHeader = React.memo(({ title, subtitle }) => (
 ));
 SectionHeader.displayName = "SectionHeader";
 
-function EduItem({ school, degree, period, current, index }) {
+function EduItem({ school, degree, period, current, itemVariants }) {
   return (
     <motion.div
-      initial={{ opacity: 0, x: -20 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{
-        type: "spring",
-        stiffness: 260,
-        damping: 24,
-        delay: index * 0.1,
-      }}
+      variants={itemVariants}
       className="relative pl-8 border-l border-white/10 group will-change-transform"
     >
       <div
@@ -47,12 +39,35 @@ function EduItem({ school, degree, period, current, index }) {
 }
 
 export default function PendidikanContent({ lang }) {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.15 },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, x: -20 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: { type: "spring", stiffness: 200, damping: 22 },
+    },
+  };
+
   return (
     <div className="space-y-16">
       <SectionHeader title={translations[lang].riwayatAkademik} subtitle="03" />
-      <div className="space-y-12">
+
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-60px" }}
+        className="space-y-12 will-change-transform"
+      >
         <EduItem
-          index={0}
           school="Universitas Komputama Majenang"
           degree={
             lang === "id"
@@ -61,9 +76,9 @@ export default function PendidikanContent({ lang }) {
           }
           period={lang === "id" ? "2024 — Sekarang" : "2024 — Present"}
           current={true}
+          itemVariants={itemVariants}
         />
         <EduItem
-          index={1}
           school="SMK Darussalam Karangpucung"
           degree={
             lang === "id"
@@ -72,8 +87,9 @@ export default function PendidikanContent({ lang }) {
           }
           period="2020 — 2023"
           current={false}
+          itemVariants={itemVariants}
         />
-      </div>
+      </motion.div>
     </div>
   );
 }

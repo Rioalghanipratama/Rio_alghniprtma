@@ -18,7 +18,7 @@ const SectionHeader = React.memo(({ title, subtitle }) => (
 
 SectionHeader.displayName = "SectionHeader";
 
-function ProjectCard({ project, index, lang }) {
+function ProjectCard({ project, index, lang, itemVariants }) {
   const cardRef = useRef(null);
 
   const handleMouseMove = (e) => {
@@ -33,15 +33,7 @@ function ProjectCard({ project, index, lang }) {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{
-        type: "spring",
-        stiffness: 260,
-        damping: 25,
-        delay: index * 0.05,
-      }}
+      variants={itemVariants}
       className={`grid grid-cols-1 lg:grid-cols-2 gap-10 items-center will-change-transform ${
         index % 2 !== 0 ? "lg:[&>*:first-child]:order-2" : ""
       }`}
@@ -340,8 +332,31 @@ export default function ProyekContent({ lang }) {
     },
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.15 },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { type: "spring", stiffness: 200, damping: 22 },
+    },
+  };
+
   return (
-    <div className="space-y-20">
+    <motion.div
+      variants={containerVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-60px" }}
+      className="space-y-20 will-change-transform"
+    >
       <SectionHeader
         title={lang === "id" ? "Arsip Proyek" : "Project Archive"}
         subtitle="01"
@@ -352,8 +367,9 @@ export default function ProyekContent({ lang }) {
           project={project}
           index={index}
           lang={lang}
+          itemVariants={itemVariants}
         />
       ))}
-    </div>
+    </motion.div>
   );
 }
