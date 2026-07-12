@@ -68,7 +68,11 @@ export default function PendidikanContent({ lang }) {
         className="space-y-12 will-change-transform"
       >
         <EduItem
-          school="Universitas Komputama Majenang"
+          school={
+            lang === "id"
+              ? "Universitas Komputama Cilacap"
+              : "Komputama University Cilacap"
+          }
           degree={
             lang === "id"
               ? "S1 Sistem Informasi"
@@ -79,7 +83,11 @@ export default function PendidikanContent({ lang }) {
           itemVariants={itemVariants}
         />
         <EduItem
-          school="SMK Darussalam Karangpucung"
+          school={
+            lang === "id"
+              ? "SMK Darussalam Karangpucung"
+              : "Darussalam Karangpucung Vocational High School"
+          }
           degree={
             lang === "id"
               ? "Teknik Komputer dan Jaringan"
