@@ -1,11 +1,11 @@
 import React, { useRef } from "react";
 import { motion } from "framer-motion";
 import { CheckCircle2, ArrowUpRight } from "lucide-react";
-import andoliImg from "../../assets/andoli.png";
-import sirukaImg from "../../assets/siruka.png";
-import siakadImg from "../../assets/siakad.png";
-import apikperpusImg from "../../assets/apikperpus.png";
-import webkuImg from "../../assets/webku.png";
+import andoliImg from "../../assets/andoli.webp";
+import sirukaImg from "../../assets/siruka.webp";
+import siakadImg from "../../assets/siakad.webp";
+import apikperpusImg from "../../assets/apikperpus.webp";
+import webkuImg from "../../assets/webku.webp";
 
 const SectionHeader = React.memo(({ title, subtitle }) => (
   <div className="flex items-baseline gap-4 mb-12">
